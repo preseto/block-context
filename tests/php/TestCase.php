@@ -8,6 +8,9 @@
 
 namespace Preseto\BlockContextTest;
 
+/**
+ * Our own test case.
+ */
 abstract class TestCase extends \WP_Mock\Tools\TestCase {
 
 }
