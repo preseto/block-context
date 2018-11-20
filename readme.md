@@ -11,7 +11,7 @@ Source of the [Block Context plugin](https://blockcontext.com) for WordPress.
 
 - Install as a [Composer](https://packagist.org/packages/preseto/block-context) dependency:
 
-	  composer require kasparsd/widget-context
+	  composer require preseto/block-context
 
 
 ## Development
