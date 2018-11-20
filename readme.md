@@ -5,6 +5,12 @@
 Source of the [Block Context plugin](https://blockcontext.com) for WordPress.
 
 
+## Requirements
+
+- WordPress 5.0+
+- or the [Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/)
+
+
 ## Install
 
 - Search for "Widget Context" under "Plugins → Add New" in your WordPress dashboard.
