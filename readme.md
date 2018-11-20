@@ -1,4 +1,6 @@
-# Widget Context
+# <img src="https://blockcontext.com/wp-content/uploads/sites/3/2018/11/block-context-logo.png" alt="Block Conete" width="80" align="left" /> Block Context
+
+**A WordPress plugin to show or hide any Gutenberg block in context.**
 
 [![Build Status](https://travis-ci.org/preseto/block-context.svg?branch=master)](https://travis-ci.org/preseto/block-context)
 
@@ -30,6 +32,10 @@ Source of the [Block Context plugin](https://blockcontext.com) for WordPress.
 2. Setup the development environment and tools:
 
 	   composer install
+
+3. Build the plugin JS and CSS assets:
+
+	   composer build
 
 
 ## Screenshots
