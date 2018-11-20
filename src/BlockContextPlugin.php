@@ -29,7 +29,25 @@ class BlockContextPlugin {
 	 * @return void
 	 */
 	public function init() {
-		// TODO Add hooks.
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
+	}
+
+	/**
+	 * Load our block assets.
+	 *
+	 * @return void
+	 */
+	public function enqueue_editor_assets() {
+		wp_enqueue_script(
+			'preseto-block-context-editor-js',
+			$this->plugin->asset_url( 'assets/dist/editor.js' ),
+			[
+				'wp-compose',
+				'wp-element',
+				'wp-editor',
+				'wp-components',
+			]
+		);
 	}
 
 }
