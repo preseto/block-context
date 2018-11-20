@@ -1,9 +1,7 @@
-const path = require('path')
-
 module.exports = {
-  entry: [
-    './assets/js/block.js',
-  ],
+  entry: {
+    editor: './assets/js/editor.js',
+  },
   module: {
     rules: [
       {
