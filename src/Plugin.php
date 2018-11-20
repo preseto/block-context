@@ -127,6 +127,24 @@ class Plugin {
 	}
 
 	/**
+	 * Is WP debug mode enabled.
+	 *
+	 * @return boolean
+	 */
+	public function is_debug() {
+		return ( defined( 'WP_DEBUG' ) && WP_DEBUG );
+	}
+
+	/**
+	 * Is WP script debug mode enabled.
+	 *
+	 * @return boolean
+	 */
+	public function is_script_debug() {
+		return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+	}
+
+	/**
 	 * Return the current version of the plugin.
 	 *
 	 * @return mixed
