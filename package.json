@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "webpack --mode production -o assets/dist/[name].js",
-    "dev": "webpack --mode development -o assets/dist/[name].js",
+    "dev": "webpack --watch --mode development -o assets/dist/[name].js",
     "clean": "rimraf assets/dist/*.js"
   },
   "license": "GPL-2.0",
