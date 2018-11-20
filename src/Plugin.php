@@ -154,6 +154,19 @@ class Plugin {
 	}
 
 	/**
+	 * Sync the plugin version with the asset version.
+	 *
+	 * @return string
+	 */
+	public function asset_version() {
+		if ( $this->is_debug() || $this->is_script_debug() ) {
+			return time();
+		}
+
+		return $this->version();
+	}
+
+	/**
 	 * Get plugin meta data.
 	 *
 	 * @param  string $field Optional field key.
