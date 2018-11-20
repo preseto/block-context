@@ -1,10 +1,10 @@
-# <img src="https://blockcontext.com/wp-content/uploads/sites/3/2018/11/block-context-logo.png" alt="Block Conete" width="80" align="left" /> Block Context
+# [<img src="https://blockcontext.com/wp-content/uploads/sites/3/2018/11/block-context-logo.png" alt="Block Conete" width="80" align="left" /> Block Context for Gutenberg](https://blockcontext.com)
 
 **A WordPress plugin to show or hide any Gutenberg block in context.**
 
 [![Build Status](https://travis-ci.org/preseto/block-context.svg?branch=master)](https://travis-ci.org/preseto/block-context)
 
-Source of the [Block Context plugin](https://blockcontext.com) for WordPress.
+Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for WordPress.
 
 
 ## Requirements
