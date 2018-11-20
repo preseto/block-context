@@ -13,7 +13,7 @@ Source of the [Block Context plugin](https://blockcontext.com) for WordPress.
 
 ## Install
 
-- Search for "Widget Context" under "Plugins → Add New" in your WordPress dashboard.
+- Search for "Block Context" under "Plugins → Add New" in your WordPress dashboard.
 
 - Install as a [Composer](https://packagist.org/packages/preseto/block-context) dependency:
 
