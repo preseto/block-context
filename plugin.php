@@ -3,7 +3,7 @@
  * Plugin Name: Block Context
  * Plugin URI: https://widgetcontext.com
  * Description: Show or hide Gutenberg blocks in context.
- * Version: 1.1.0
+ * Version: 0.1.0
  * Author: Preseto
  * Author URI: https://preseto.com
  * Requires PHP: 5.3
