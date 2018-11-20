@@ -41,3 +41,8 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 ## Screenshots
 
 TODO
+
+
+## Credits
+
+Created by [Kaspars Dambis](https://kaspars.net).
