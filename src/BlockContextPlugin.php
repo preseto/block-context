@@ -46,7 +46,8 @@ class BlockContextPlugin {
 				'wp-element',
 				'wp-editor',
 				'wp-components',
-			]
+			],
+			$this->plugin->asset_version()
 		);
 	}
 
