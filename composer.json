@@ -1,0 +1,52 @@
+{
+  "name": "kasparsd/block-context",
+  "description": "WordPress plugin for showing or hiding Gutenberg blocks depending on context.",
+  "homepage": "https://blockcontext.com",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Kaspars Dambis",
+      "homepage": "https://preseto.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/kasparsd/block-context/issues",
+    "source": "https://github.com/kasparsd/block-context"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6",
+    "wp-coding-standards/wpcs": "^1.2",
+    "10up/wp_mock": "^0.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Preseto\\BlockContext\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Preseto\\BlockContextTest\\": "tests/php/"
+    }
+  },
+  "scripts": {
+    "lint-php": [
+      "./vendor/bin/phpcs ."
+    ],
+    "lint": [
+      "@lint-php"
+    ],
+    "test-php": [
+      "./vendor/bin/phpunit"
+    ],
+    "test": [
+      "@test-php"
+    ],
+    "post-install-cmd": [
+      "npm install"
+    ],
+    "post-update-cmd": [
+      "npm install"
+    ]
+  }
+}

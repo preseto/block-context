@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 7.0
+  - 5.4
+
+install:
+  - composer install
+
+script:
+  - composer lint
+  - composer test
+
+notifications:
+  email: false

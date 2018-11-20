@@ -1,0 +1,12 @@
+{
+  "name": "block-context",
+  "description": "WordPress plugin for showing or hiding Gutenberg blocks in context.",
+  "homepage": "https://blockcontext.com",
+  "author": {
+    "name": "Kaspars Dambis",
+    "url": "https://preseto.com"
+  },
+  "scripts": {},
+  "license": "GPL-2.0",
+  "devDependencies": {}
+}
