@@ -1,5 +1,5 @@
 {
-  "name": "kasparsd/block-context",
+  "name": "preseto/block-context",
   "description": "WordPress plugin for showing or hiding Gutenberg blocks depending on context.",
   "homepage": "https://blockcontext.com",
   "type": "wordpress-plugin",
@@ -11,8 +11,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/kasparsd/block-context/issues",
-    "source": "https://github.com/kasparsd/block-context"
+    "issues": "https://github.com/preseto/block-context/issues",
+    "source": "https://github.com/preseto/block-context"
   },
   "require-dev": {
     "phpunit/phpunit": "^6",
