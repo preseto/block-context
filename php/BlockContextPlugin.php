@@ -40,7 +40,7 @@ class BlockContextPlugin {
 	public function enqueue_editor_assets() {
 		wp_enqueue_script(
 			'preseto-block-context-editor-js',
-			$this->plugin->asset_url( 'assets/dist/editor.js' ),
+			$this->plugin->asset_url( 'js/dist/editor.js' ),
 			[
 				'wp-compose',
 				'wp-element',

@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    editor: './assets/js/editor.js',
+    editor: './js/src/editor.js',
   },
   module: {
     rules: [
