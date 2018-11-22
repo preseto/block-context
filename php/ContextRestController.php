@@ -1,4 +1,7 @@
 <?php
+/**
+ * TODO: Allow read access to logged-in users only for now.
+ */
 
 namespace Preseto\BlockContext;
 
