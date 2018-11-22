@@ -15,4 +15,5 @@ namespace Preseto\BlockContext;
 require_once __DIR__ . '/vendor/autoload.php';
 
 $block_context_plugin = new BlockContextPlugin( new Plugin( __FILE__ ) );
-$block_context_plugin->init();
+
+add_action( 'plugins_loaded', [ $block_context_plugin, 'init' ] );
