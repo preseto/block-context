@@ -58,6 +58,7 @@ class BlockContextPlugin {
 				'wp-element',
 				'wp-editor',
 				'wp-components',
+				'lodash',
 			],
 			$this->plugin->asset_version()
 		);
