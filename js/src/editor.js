@@ -1,34 +1,46 @@
-const { createHigherOrderComponent, withState } = wp.compose;
-const { Fragment } = wp.element;
+import BlockContext from './components/block-context';
+
+const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.editor;
-const { PanelBody, CheckboxControl } = wp.components;
-const { __ } = wp.i18n;
+const { Fragment } = wp.element;
+const { addFilter } = wp.hooks;
+const { assign } = lodash;
 
-wp.hooks.addFilter(
-    'editor.BlockEdit',
-    'preseto/block-context/block-controls',
-    createHigherOrderComponent( ( BlockEdit ) => {
-        return ( props ) => {
-			const HideToggle = withState( {
-				isChecked: false,
-			} )( ( { isChecked, setState } ) => (
-				<CheckboxControl
-					label={ __( 'Hide block if selected', 'block-context' ) }
-					checked={ isChecked }
-					onChange={ ( isChecked ) => { setState( { isChecked } ) } }
-				/>
-			) );
+function defineBlockContextIdAttribute( settings ) {
+    settings.attributes = assign( settings.attributes, {
+        blockContextId: {
+            type: 'number',
+        },
+    } );
 
+    return settings;
+}
+
+const blockContextControls = createHigherOrderComponent( ( BlockEdit ) => {
+    return ( props ) => {
+        if ( props.isSelected ) {
             return (
                 <Fragment>
                     <BlockEdit { ...props } />
                     <InspectorControls>
-                        <PanelBody title={ __( 'Block Context', 'block-context' ) }>
-							<HideToggle />
-                        </PanelBody>
-                    </InspectorControls>
+                        <BlockContext { ...props } />
+                    </InspectorControls> 
                 </Fragment>
             );
-        };
-    }, 'withInspectorControl' )
+        }
+        
+        return <BlockEdit { ...props } />;
+    };
+}, 'withInspectorControl' );
+
+addFilter(
+    'blocks.registerBlockType',
+    'preseto/block-context/block-attributes',
+    defineBlockContextIdAttribute
+);
+
+addFilter(
+    'editor.BlockEdit',
+    'preseto/block-context/block-controls',
+    blockContextControls
 );
