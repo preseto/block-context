@@ -14,8 +14,6 @@ class BlockContext extends Component {
         this.updateContextSetting = this.updateContextSetting.bind( this );
         this.setBlockContextId = this.setBlockContextId.bind( this );
 
-        console.log( 'id', blockContextId );
-
         this.state = {
             clientId,
             settings,
@@ -42,7 +40,8 @@ class BlockContext extends Component {
             settings: setting,
         } );
 
-        this.setBlockContextId( 1234 );
+        // TODO: Replace the clientId with a permanent post ID when saving. 
+        // this.setBlockContextId( 1234 );
     }
 
     render () {
@@ -67,7 +66,7 @@ export default compose( [
         return {
             blockContextId,
             settings: {
-                userLogin: Math.floor( Math.random() * 10 )
+                userLogin: null,
             }
 		};
 	} ),
