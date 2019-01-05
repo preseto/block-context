@@ -7,8 +7,8 @@
     "url": "https://preseto.com"
   },
   "scripts": {
-    "build": "webpack --mode production -o ./js/dist/[name].js",
-    "dev": "webpack --watch --mode development -o ./js/dist/[name].js",
+    "build": "webpack --mode=production --output=./js/dist/[name].js",
+    "dev": "webpack --watch --mode=development --output=./js/dist/[name].js",
     "clean": "rimraf ./js/dist/*.js"
   },
   "license": "GPL-2.0",
