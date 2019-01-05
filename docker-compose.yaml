@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ".:/var/www/html/wp-content/plugins/block-context"
+    restart: always
+    environment:
+      WORDPRESS_DEBUG: 1
