@@ -38,7 +38,7 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 
 	   vagrant up
 
-	which will be available at [http://blockcontext.local](http://blockcontext.local) after provisioning.
+	which will be available at [http://blockcontext.local](http://blockcontext.local) after provisioning (username: `admin`, password: `password`).
 
 4. Build the plugin JS and CSS assets:
 
