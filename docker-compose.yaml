@@ -23,6 +23,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - wordpress:/var/www/html
       - ".:/var/www/html/wp-content/plugins/block-context"
     restart: always
     environment:
@@ -30,5 +31,16 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: password
 
+  wpcli:
+    image: wordpress:cli
+    depends_on:
+      - mysql
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    command: wp core install --url=blockcontext.local --title="Block Context" --admin_user=admin --admin_password=password --admin_email=admin@example.com --path=/var/www/html
+
 volumes:
   db_data: {}
+  wordpress: {}
