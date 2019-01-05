@@ -38,7 +38,6 @@ services:
       - wordpress
     volumes:
       - wordpress:/var/www/html
-    restart: always
     command: wp core install --url=blockcontext.local --title="Block Context" --admin_user=admin --admin_password=password --admin_email=admin@example.com --path=/var/www/html
 
 volumes:
