@@ -1,0 +1,14 @@
+/tests
+/vendor
+/node_modules
+/assets/wporg
+Gruntfile.js
+composer.json
+composer.lock
+package.json
+package-lock.json
+phpcs.xml
+phpunit.xml
+readme.md
+readme.txt.md
+.*
