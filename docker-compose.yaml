@@ -4,8 +4,6 @@ services:
 
   mysql:
     image: mysql:5
-    ports:
-      - "3306:3306"
     volumes:
        - db_data:/var/lib/mysql
     restart: always
@@ -16,7 +14,9 @@ services:
       MYSQL_ROOT_PASSWORD: password
 
   wordpress:
-    image: wordpress:php7.2-fpm
+    image: wordpress:latest
+    links:
+      - mysql:mysql
     depends_on:
       - mysql
     ports:
@@ -27,9 +27,8 @@ services:
     restart: always
     environment:
       WORDPRESS_DEBUG: 1
-      WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: password
 
 volumes:
-    db_data: {}
+  db_data: {}
