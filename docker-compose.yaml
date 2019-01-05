@@ -4,15 +4,19 @@ services:
 
   mysql:
     image: mysql:5
+    ports:
+      - "3306:3306"
+    volumes:
+       - db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_DATABASE: wordpress
-      MYSQL_USER: root
+      MYSQL_USER: wordpress
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
 
   wordpress:
-    image: wordpress:latest
+    image: wordpress:php7.2-fpm
     depends_on:
       - mysql
     ports:
@@ -23,3 +27,9 @@ services:
     restart: always
     environment:
       WORDPRESS_DEBUG: 1
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: password
+
+volumes:
+    db_data: {}
