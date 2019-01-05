@@ -9,8 +9,9 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 
 ## Requirements
 
-- WordPress 5.0+
-- or the [Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/)
+- WordPress 5.0+ or the [Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/).
+- [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org) for dependency management.
+- [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org) for local testing environment.
 
 
 ## Install
@@ -29,11 +30,17 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 	   git clone https://github.com/preseto/block-context.git
 	   cd block-context
 
-2. Setup the development environment and tools:
+2. Setup the development environment and tools using [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org):
 
 	   composer install
 
-3. Build the plugin JS and CSS assets:
+3. Start a virtual testing environment using [Vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/):
+
+	   vagrant up
+
+	which will be available at [http://blockcontext.local](http://blockcontext.local) after provisioning.
+
+4. Build the plugin JS and CSS assets:
 
 	   composer build
 
