@@ -1,80 +1,117 @@
 import UserLoginContext from './contexts/user-login';
 
 const { Component } = wp.element;
-const { PanelBody } = wp.components;
+const { PanelBody, ToggleControl } = wp.components;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
 const { __ } = wp.i18n;
 
 class BlockContext extends Component {
-    
-    constructor( { clientId, blockContextId, settings } ) {
-        super( ...arguments );
 
-        this.updateContextSetting = this.updateContextSetting.bind( this );
-        this.setBlockContextId = this.setBlockContextId.bind( this );
+	constructor( { clientId, blockContextId, settings, blockContext, generateBlockContextId, updateBlockContext } ) {
+		super( ...arguments );
 
-        this.state = {
-            clientId,
-            settings,
-            blockContextId,
-        };
-    }
+		console.log('BlockContext', blockContext);
 
-    setBlockContextId( blockContextId ) {
-        this.setState( {
-            blockContextId,
-        } );
+		this.updateContextSetting = this.updateContextSetting.bind( this );
+		this.setBlockContextId = this.setBlockContextId.bind( this );
 
-        this.props.setAttributes( {
-            blockContextId: blockContextId,
-        } );
-    }
+		this.state = {
+			clientId,
+			settings,
+			blockContextId,
+		};
 
-    updateContextSetting( key, value ) {
-        const setting = {};
-        
-        setting[ key ] = value;
-        
-        this.setState( { 
-            settings: setting,
-        } );
+		if ( ! blockContextId ) {
+			this.setBlockContextId( generateBlockContextId() );
+		}
+	}
 
-        // TODO: Replace the clientId with a permanent post ID when saving. 
-        // this.setBlockContextId( 1234 );
-    }
+	setBlockContextId ( blockContextId ) {
+		console.log(blockContextId);
+/*
+		this.setState( {
+			blockContextId,
+		} );
 
-    render () {
-        const { userLogin } = this.state;
+		this.props.setAttributes( {
+			blockContextId: blockContextId,
+		} );*/
+	}
 
-        return (
-            <PanelBody title={ __( 'Block Context', 'block-context' ) }>
-                <UserLoginContext
-                    value={ userLogin }
-                    onChange={ ( value ) => this.updateContextSetting( 'userLogin', value ) }
-                />
-            </PanelBody>
-        );
-    }
+	updateContextSetting ( key, value ) {
+		const setting = {};
+
+		setting[ key ] = value;
+
+		this.setState( {
+			settings: setting,
+		} );
+
+		// TODO: Replace the clientId with a permanent post ID when saving.
+		// this.setBlockContextId( 1234 );
+	}
+
+	toggleContextEnable () {
+		const { attributes, setAttributes } = this.props;
+	}
+
+	render () {
+		const { settings } = this.state;
+
+		return (
+			<PanelBody title={ __( 'Block Context', 'block-context' ) }>
+				<ToggleControl
+					label={ __( 'Enable Block Context', 'block-context' ) }
+					checked={ settings.enabled }
+					onChange={ ( value ) => this.updateContextSetting( 'enabled', ! settings.enabled ) }
+				/>
+				<UserLoginContext
+					value={ settings.userLogin }
+					onChange={ ( value ) => this.updateContextSetting( 'userLogin', value ) }
+				/>
+			</PanelBody>
+		);
+	}
 
 }
 
 export default compose( [
-	withSelect( ( select, ownProps ) => {
-        const { blockContextId } = ownProps.attributes;
+	withSelect( ( select, ownProps, { dispatch } ) => {
+		const { clientId } = ownProps;
+		const { blockContextId } = ownProps.attributes;
+		const { getEntityRecord } = select( 'core' );
 
-        return {
-            blockContextId,
-            settings: {
-                userLogin: null,
-            }
+		return {
+			blockContextId,
+			blockContext: blockContextId ? getEntityRecords( 'postType', 'block_context', blockContextId ) : {},
+			settings: {
+				userLogin: null,
+				enabled: false,
+			}
 		};
 	} ),
 	withDispatch( ( dispatch, ownProps ) => {
 		return {
-			updateBlockContext() {
-                console.log( 'updateBlockContext', ownProps );
-            } 
+			updateBlockContext () {
+				console.log( 'updateBlockContext', ownProps );
+			},
+
+			generateBlockContextId () {
+				const { clientId } = ownProps;
+				const { saveEntityRecord } = dispatch( 'core' );
+
+				return saveEntityRecord(
+					'postType',
+					'block_context',
+					{
+						title: clientId,
+						status: 'publish',
+					}
+				).then( record => {
+					console.log(record);
+				} )
+			}
 		};
 	} ),
 ] )( BlockContext );

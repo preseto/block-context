@@ -1,46 +1,23 @@
-import BlockContext from './components/block-context';
+import BlockContextControls from './components/block-context-controls';
+import BlockContextBlock from './block-context-block';
+import blockContextAttributes from './block-context-attributes';
 
-const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.editor;
-const { Fragment } = wp.element;
+const { registerBlockType } = wp.blocks;
 const { addFilter } = wp.hooks;
-const { assign } = lodash;
-
-function defineBlockContextIdAttribute( settings ) {
-    settings.attributes = assign( settings.attributes, {
-        blockContextId: {
-            type: 'number',
-        },
-    } );
-
-    return settings;
-}
-
-const blockContextControls = createHigherOrderComponent( ( BlockEdit ) => {
-    return ( props ) => {
-        if ( props.isSelected ) {
-            return (
-                <Fragment>
-                    <BlockEdit { ...props } />
-                    <InspectorControls>
-                        <BlockContext { ...props } />
-                    </InspectorControls> 
-                </Fragment>
-            );
-        }
-        
-        return <BlockEdit { ...props } />;
-    };
-}, 'withInspectorControl' );
 
 addFilter(
-    'blocks.registerBlockType',
-    'preseto/block-context/block-attributes',
-    defineBlockContextIdAttribute
+	'blocks.registerBlockType',
+	'preseto/block-context/block-attributes',
+	blockContextAttributes
 );
 
 addFilter(
-    'editor.BlockEdit',
-    'preseto/block-context/block-controls',
-    blockContextControls
+	'editor.BlockEdit',
+	'preseto/block-context/block-controls',
+	BlockContextControls
+);
+
+registerBlockType(
+	'preseto/block-context-block',
+	BlockContextBlock
 );
