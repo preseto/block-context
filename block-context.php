@@ -12,7 +12,10 @@
 
 namespace Preseto\BlockContext;
 
-require_once __DIR__ . '/vendor/autoload.php';
+// Support for site-level autoloading.
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+}
 
 $block_context_plugin = new BlockContextPlugin( new Plugin( __FILE__ ) );
 
