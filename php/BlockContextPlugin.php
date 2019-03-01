@@ -7,7 +7,9 @@ namespace Preseto\BlockContext;
  */
 class BlockContextPlugin {
 
-	const BLOCK_SCRIPT_ID = 'preseto-block-context-block';
+	const BLOCK_CONTEXT_BLOCK_ID = 'preseto/block-context-block';
+
+	const BLOCK_CONTEXT_SCRIPT_ID = 'preseto-block-context-block';
 
 	/**
 	 * Plugin interface.
@@ -57,7 +59,7 @@ class BlockContextPlugin {
 
 	public function register_blocks() {
 		wp_register_script(
-			self::BLOCK_SCRIPT_ID,
+			self::BLOCK_CONTEXT_SCRIPT_ID,
 			$this->plugin->asset_url( 'js/dist/block.js' ),
 			[
 				'wp-compose',
@@ -70,7 +72,7 @@ class BlockContextPlugin {
 		);
 
 		wp_register_style(
-			self::BLOCK_SCRIPT_ID,
+			self::BLOCK_CONTEXT_SCRIPT_ID,
 			$this->plugin->asset_url( 'js/src/styles/block-context-block.css' ),
 			[
 				'wp-edit-blocks',
@@ -79,10 +81,10 @@ class BlockContextPlugin {
 		);
 
 		register_block_type(
-			'preseto/block-context-block',
+			self::BLOCK_CONTEXT_BLOCK_ID,
 			[
 				//'editor_script' => self::BLOCK_SCRIPT_ID,
-				'editor_style' => self::BLOCK_SCRIPT_ID,
+				'editor_style' => self::BLOCK_CONTEXT_SCRIPT_ID,
 			]
 		);
 	}
