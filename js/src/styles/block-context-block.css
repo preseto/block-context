@@ -1,0 +1,15 @@
+.wp-block-preseto-block-context-block {
+    padding: 1em 0 1em 1em;
+    margin-left: -1em;
+    border-left: 4px double #ccc;
+}
+
+.wp-block-preseto-block-context-block__status-bar {
+    z-index: 2;
+    position: relative;
+    padding: 0.25em 1em;
+    left: -1em;
+    right: -1em;
+    margin-right: -2em;
+    line-height: 1;
+}
