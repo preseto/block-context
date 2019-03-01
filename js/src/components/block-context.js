@@ -2,8 +2,6 @@ import UserLoginContext from './contexts/user-login';
 
 const { Component } = wp.element;
 const { PanelBody, ToggleControl } = wp.components;
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
 const { __ } = wp.i18n;
 
 class BlockContext extends Component {
