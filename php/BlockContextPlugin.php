@@ -32,9 +32,7 @@ class BlockContextPlugin {
 
 		$this->context_enable = new Contexts\ContextEnable();
 
-		$this->contexts = new BlockContexts( [
-			$this->context_enable,
-		] );
+		$this->contexts = new BlockContexts();
 	}
 
 	/**
@@ -73,7 +71,7 @@ class BlockContextPlugin {
 	}
 
 	public function block_is_hidden( $block ) {
-		return $this->contexts->matches( $block );
+		return ( ! $this->contexts->matches( $block ) );
 	}
 
 	/**

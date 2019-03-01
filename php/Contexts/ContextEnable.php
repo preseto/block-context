@@ -9,7 +9,7 @@ class ContextEnable extends Context {
 	}
 
 	public function match( $state ) {
-		return null;
+		return (bool) $state;
 	}
 
 }

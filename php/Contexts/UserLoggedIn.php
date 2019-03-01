@@ -9,14 +9,14 @@ class UserLoggedIn extends Context {
 	}
 
 	public function match( $state ) {
-		$is_logged_in = is_user_logged_in();
+		$is_logged_in = (bool) is_user_logged_in();
 
 		$rules = [
 			'logged-in' => $is_logged_in,
 			'logged-out' => ! $is_logged_in,
 		];
 
-		return ( isset( $rules[ $state ] ) && ! empty( $rules[ $state ] ) );
+		return ( isset( $rules[ $state ] ) && true === $rules[ $state ] );
 	}
 
 }
