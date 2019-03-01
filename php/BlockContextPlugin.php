@@ -69,11 +69,11 @@ class BlockContextPlugin {
 	}
 
 	public function block_context_enabled( $block ) {
-		return $this->contexts->matches( $block );
+		return $this->contexts->matches( $block, [ $this->context_enable ] );
 	}
 
 	public function block_is_hidden( $block ) {
-		return $this->contexts->matches( $block, [ $this->context_enable ] );
+		return $this->contexts->matches( $block );
 	}
 
 	/**
