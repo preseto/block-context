@@ -52,7 +52,7 @@ class BlockContextPlugin {
 	 * Disable block output if context enabled and matches.
 	 *
 	 * @param  string $rendered Rendered block output.
-	 * @param  array $block    Block meta data.
+	 * @param  array  $block    Block meta data.
 	 *
 	 * @return string
 	 */
@@ -66,10 +66,24 @@ class BlockContextPlugin {
 		return $rendered;
 	}
 
+	/**
+	 * If a block has context enabled.
+	 *
+	 * @param  Preseto\BlockContext\Block $block Instance of a block.
+	 *
+	 * @return boolean
+	 */
 	public function block_context_enabled( $block ) {
 		return $this->contexts->matches( $block, [ $this->context_enable ] );
 	}
 
+	/**
+	 * Check if a block should be hidden according to the context rules.
+	 *
+	 * @param  Preseto\BlockContext\Block $block Instance of a block.
+	 *
+	 * @return boolean
+	 */
 	public function block_is_hidden( $block ) {
 		return ( ! $this->contexts->matches( $block ) );
 	}
