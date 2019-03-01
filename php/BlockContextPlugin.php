@@ -18,6 +18,8 @@ class BlockContextPlugin {
 	 */
 	protected $plugin;
 
+	protected $contexts;
+
 	/**
 	 * Setup the plugin instance.
 	 *
@@ -25,6 +27,7 @@ class BlockContextPlugin {
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
+		$this->contexts = new BlockContexts();
 	}
 
 	/**
@@ -33,6 +36,8 @@ class BlockContextPlugin {
 	 * @return void
 	 */
 	public function init() {
+		$this->contexts->add( new Contexts\UserLoggedIn() );
+
 		add_action( 'init', [ $this, 'register_blocks' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
 		add_filter( 'render_block', [ $this, 'maybe_hide_block' ], 5, 2 );
@@ -47,7 +52,7 @@ class BlockContextPlugin {
 	 * @return string
 	 */
 	public function maybe_hide_block( $rendered, $block ) {
-		$context = new Block( $block );
+		$context = new Block( $block, $this->contexts );
 
 		if ( $context->is_hidden() ) {
 			return '';
