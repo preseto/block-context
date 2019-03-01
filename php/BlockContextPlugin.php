@@ -7,7 +7,6 @@ namespace Preseto\BlockContext;
  */
 class BlockContextPlugin {
 
-	const CONTEXT_POST_TYPE = 'block_context';
 
 	/**
 	 * Plugin interface.
@@ -17,21 +16,12 @@ class BlockContextPlugin {
 	protected $plugin;
 
 	/**
-	 * Context store interface.
-	 *
-	 * @var \Preseto\BlockContext\ContextStore
-	 */
-	protected $context_store;
-
-	/**
 	 * Setup the plugin instance.
 	 *
 	 * @param \Preseto\BlockContext\Plugin $plugin Instance of the plugin abstraction.
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-
-		$this->context_store = new ContextStore( self::CONTEXT_POST_TYPE );
 	}
 
 	/**
@@ -40,7 +30,6 @@ class BlockContextPlugin {
 	 * @return void
 	 */
 	public function init() {
-		add_action( 'init', [ $this->context_store, 'init' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
 	}
 
