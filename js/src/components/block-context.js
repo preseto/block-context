@@ -8,39 +8,23 @@ const { __ } = wp.i18n;
 
 class BlockContext extends Component {
 
-	constructor( { settings } ) {
+	constructor( props ) {
 		super( ...arguments );
 
-		this.updateContextSetting = this.updateContextSetting.bind( this );
-
-		this.state = {
-			settings
-		};
-	}
-
-	updateContextSetting ( key, value ) {
-		const setting = {};
-
-		setting[ key ] = value;
-
-		this.setState( {
-			settings: setting,
-		} );
+		this.props = props;
 	}
 
 	render () {
-		const { settings } = this.state;
-
 		return (
 			<PanelBody title={ __( 'Block Context', 'block-context' ) }>
 				<ToggleControl
 					label={ __( 'Enable Block Context', 'block-context' ) }
-					checked={ settings.enabled }
-					onChange={ ( value ) => this.updateContextSetting( 'enabled', ! settings.enabled ) }
+					checked={ this.props.attributes.blockContextEnable }
+					onChange={ ( value ) => this.props.setAttributes( { blockContextEnable: !! value } ) }
 				/>
 				<UserLoginContext
-					value={ settings.userLogin }
-					onChange={ ( value ) => this.updateContextSetting( 'userLogin', value ) }
+					value={ this.props.attributes.blockContextUserLoginState }
+					onChange={ ( value ) => this.props.setAttributes( { blockContextUserLoginState: value } ) }
 				/>
 			</PanelBody>
 		);
@@ -48,18 +32,4 @@ class BlockContext extends Component {
 
 }
 
-export default compose( [
-	withSelect( ( select, ownProps ) => {
-		const { blockContextId } = ownProps.attributes;
-
-		return {
-			settings: {
-				userLogin: null,
-				enabled: false,
-			}
-		};
-	} ),
-	withDispatch( ( dispatch, ownProps ) => {
-		// TODO.
-	} ),
-] )( BlockContext );
+export default BlockContext;
