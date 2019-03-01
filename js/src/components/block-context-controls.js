@@ -19,4 +19,4 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 
 		return <BlockEdit { ...props } />;
 	};
-}, 'withInspectorControl' );
+}, 'withBlockContextControls' );
