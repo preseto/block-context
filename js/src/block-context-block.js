@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 export default {
 	title: __( 'Block Context Container', 'block-context' ),
 
-	icon: 'universal-access-alt',
+	icon: 'visibility',
 
 	category: 'layout',
 
