@@ -35,6 +35,25 @@ class BlockContextPlugin {
 	public function init() {
 		add_action( 'init', [ $this, 'register_blocks' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
+		add_filter( 'render_block', [ $this, 'maybe_hide_block' ], 5, 2 );
+	}
+
+	/**
+	 * Disable block output if context enabled and matches.
+	 *
+	 * @param  string $rendered Rendered block output.
+	 * @param  array $block    Block meta data.
+	 *
+	 * @return string
+	 */
+	public function maybe_hide_block( $rendered, $block ) {
+		$context = new Block( $block );
+
+		if ( $context->is_hidden() ) {
+			return '';
+		}
+
+		return $rendered;
 	}
 
 	/**
