@@ -20,7 +20,7 @@ class BlockContextPlugin {
 
 	protected $contexts;
 
-	protected $context_enable;
+	protected $context_rule;
 
 	/**
 	 * Setup the plugin instance.
@@ -30,7 +30,7 @@ class BlockContextPlugin {
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
 
-		$this->context_enable = new Contexts\ContextEnable();
+		$this->context_rule = new Contexts\ContextRule();
 
 		$this->contexts = new BlockContexts();
 	}
@@ -52,40 +52,57 @@ class BlockContextPlugin {
 	 * Disable block output if context enabled and matches.
 	 *
 	 * @param  string $rendered Rendered block output.
-	 * @param  array  $block    Block meta data.
+	 * @param  array  $block_data    Block meta data.
 	 *
 	 * @return string
 	 */
-	public function maybe_hide_block( $rendered, $block ) {
-		$block_context = new Block( $block );
+	public function maybe_hide_block( $rendered, $block_data ) {
+		$block = new Block( $block_data );
 
-		if ( $this->block_context_enabled( $block_context ) && $this->block_is_hidden( $block_context ) ) {
+		if ( ! $this->block_is_visible( $block ) ) {
 			return '';
 		}
 
 		return $rendered;
 	}
 
-	/**
-	 * If a block has context enabled.
-	 *
-	 * @param  Preseto\BlockContext\Block $block Instance of a block.
-	 *
-	 * @return boolean
-	 */
-	public function block_context_enabled( $block ) {
-		return $this->contexts->matches( $block, [ $this->context_enable ] );
+	public function block_is_visible( $block ) {
+		$block_context = new BlockContext( $block, $this->context_rule );
+
+		$rule = $block_context->value();
+
+		if ( ! empty( $rule ) ) {
+			$context_matches = $this->block_matches_contexts( $block );
+
+			if ( 'show' === $rule && $context_matches ) {
+				return true;
+			} elseif ( 'hide' === $rule && ! $context_matches ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
-	 * Check if a block should be hidden according to the context rules.
+	 * Check if a block matches any of the context rules.
 	 *
 	 * @param  Preseto\BlockContext\Block $block Instance of a block.
 	 *
 	 * @return boolean
 	 */
-	public function block_is_hidden( $block ) {
-		return ( ! $this->contexts->matches( $block ) );
+	public function block_matches_contexts( $block ) {
+		foreach ( $this->contexts->all() as $context ) {
+			$block_context = new BlockContext( $block, $context );
+
+			if ( $block_context->matches() ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

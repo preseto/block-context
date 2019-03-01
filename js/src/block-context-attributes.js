@@ -2,8 +2,8 @@ const { assign } = lodash;
 
 export default ( settings ) => {
 	settings.attributes = assign( settings.attributes, {
-		blockContextEnable: {
-			type: 'bool',
+		blockContextContextRule: {
+			type: 'string',
 		},
 		blockContextUserLoginState: {
 			type: 'string',

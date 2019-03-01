@@ -1,4 +1,5 @@
 import UserLoginContext from './contexts/user-login';
+import ContextRule from './contexts/context-rule';
 
 const { Component } = wp.element;
 const { PanelBody, ToggleControl } = wp.components;
@@ -15,10 +16,9 @@ class BlockContext extends Component {
 	render () {
 		return (
 			<PanelBody title={ __( 'Block Context', 'block-context' ) }>
-				<ToggleControl
-					label={ __( 'Enable Block Context', 'block-context' ) }
-					checked={ this.props.attributes.blockContextEnable }
-					onChange={ ( value ) => this.props.setAttributes( { blockContextEnable: !! value } ) }
+				<ContextRule
+					value={ this.props.attributes.blockContextContextRule }
+					onChange={ ( value ) => this.props.setAttributes( { blockContextContextRule: value } ) }
 				/>
 				<UserLoginContext
 					value={ this.props.attributes.blockContextUserLoginState }

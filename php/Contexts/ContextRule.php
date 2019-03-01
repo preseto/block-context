@@ -2,14 +2,14 @@
 
 namespace Preseto\BlockContext\Contexts;
 
-class ContextEnable extends Context {
+class ContextRule extends Context {
 
 	public function id() {
-		return 'Enable';
+		return 'ContextRule';
 	}
 
 	public function match( $state ) {
-		return (bool) $state;
+		return null;
 	}
 
 }
