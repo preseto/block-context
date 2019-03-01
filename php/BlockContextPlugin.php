@@ -20,6 +20,8 @@ class BlockContextPlugin {
 
 	protected $contexts;
 
+	protected $context_enable;
+
 	/**
 	 * Setup the plugin instance.
 	 *
@@ -27,7 +29,12 @@ class BlockContextPlugin {
 	 */
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-		$this->contexts = new BlockContexts();
+
+		$this->context_enable = new Contexts\ContextEnable();
+
+		$this->contexts = new BlockContexts( [
+			$this->context_enable,
+		] );
 	}
 
 	/**
@@ -52,13 +59,21 @@ class BlockContextPlugin {
 	 * @return string
 	 */
 	public function maybe_hide_block( $rendered, $block ) {
-		$context = new Block( $block, $this->contexts );
+		$block_context = new Block( $block );
 
-		if ( $context->is_hidden() ) {
+		if ( $this->block_context_enabled( $block_context ) && $this->block_is_hidden( $block_context ) ) {
 			return '';
 		}
 
 		return $rendered;
+	}
+
+	public function block_context_enabled( $block ) {
+		return $this->contexts->matches( $block );
+	}
+
+	public function block_is_hidden( $block ) {
+		return $this->contexts->matches( $block, [ $this->context_enable ] );
 	}
 
 	/**

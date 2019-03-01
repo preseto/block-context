@@ -20,11 +20,13 @@ class BlockContexts {
 		$this->contexts[ $context->id() ] = $context;
 	}
 
-	public function match( $attributes ) {
-		foreach ( $this->contexts as $context ) {
-			$context_attributes = $this->attributes_for_context( $context, $attributes );
+	public function matches( $block, $contexts = [] ) {
+		if ( empty( $context ) ) {
+			$context = $this->contexts;
+		}
 
-			if ( null !== $context_attributes && $context->match( $context_attributes ) ) {
+		foreach ( $this->contexts as $context ) {
+			if ( $this->matches_context( $block, $context ) ) {
 				return true;
 			}
 		}
@@ -32,8 +34,19 @@ class BlockContexts {
 		return false;
 	}
 
-	protected function attributes_for_context( $context, $attributes ) {
+	protected function matches_context( $block, $context ) {
+		$context_attributes = $this->attributes_for_context( $block, $context );
+
+		if ( null !== $context_attributes && $context->match( $context_attributes ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected function attributes_for_context( $block, $context ) {
 		$id_prefixed = $this->context_id_prefixed( $context->id() );
+		$attributes = $block->attributes();
 
 		if ( isset( $attributes[ $id_prefixed ] ) ) {
 			return $attributes[ $id_prefixed ];
