@@ -2,7 +2,6 @@ import BlockContext from './block-context';
 
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.editor;
-const { registerStore, subscribe, select } = wp.data;
 const { Fragment } = wp.element;
 
 export default createHigherOrderComponent( ( BlockEdit ) => {
