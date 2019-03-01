@@ -8,35 +8,14 @@ const { __ } = wp.i18n;
 
 class BlockContext extends Component {
 
-	constructor( { clientId, blockContextId, settings, blockContext, generateBlockContextId, updateBlockContext } ) {
+	constructor( { settings } ) {
 		super( ...arguments );
 
-		console.log('BlockContext', blockContext);
-
 		this.updateContextSetting = this.updateContextSetting.bind( this );
-		this.setBlockContextId = this.setBlockContextId.bind( this );
 
 		this.state = {
-			clientId,
-			settings,
-			blockContextId,
+			settings
 		};
-
-		if ( ! blockContextId ) {
-			this.setBlockContextId( generateBlockContextId() );
-		}
-	}
-
-	setBlockContextId ( blockContextId ) {
-		console.log(blockContextId);
-/*
-		this.setState( {
-			blockContextId,
-		} );
-
-		this.props.setAttributes( {
-			blockContextId: blockContextId,
-		} );*/
 	}
 
 	updateContextSetting ( key, value ) {
@@ -47,13 +26,6 @@ class BlockContext extends Component {
 		this.setState( {
 			settings: setting,
 		} );
-
-		// TODO: Replace the clientId with a permanent post ID when saving.
-		// this.setBlockContextId( 1234 );
-	}
-
-	toggleContextEnable () {
-		const { attributes, setAttributes } = this.props;
 	}
 
 	render () {
@@ -77,14 +49,10 @@ class BlockContext extends Component {
 }
 
 export default compose( [
-	withSelect( ( select, ownProps, { dispatch } ) => {
-		const { clientId } = ownProps;
+	withSelect( ( select, ownProps ) => {
 		const { blockContextId } = ownProps.attributes;
-		const { getEntityRecord } = select( 'core' );
 
 		return {
-			blockContextId,
-			blockContext: blockContextId ? getEntityRecords( 'postType', 'block_context', blockContextId ) : {},
 			settings: {
 				userLogin: null,
 				enabled: false,
@@ -92,26 +60,6 @@ export default compose( [
 		};
 	} ),
 	withDispatch( ( dispatch, ownProps ) => {
-		return {
-			updateBlockContext () {
-				console.log( 'updateBlockContext', ownProps );
-			},
-
-			generateBlockContextId () {
-				const { clientId } = ownProps;
-				const { saveEntityRecord } = dispatch( 'core' );
-
-				return saveEntityRecord(
-					'postType',
-					'block_context',
-					{
-						title: clientId,
-						status: 'publish',
-					}
-				).then( record => {
-					console.log(record);
-				} )
-			}
-		};
+		// TODO.
 	} ),
 ] )( BlockContext );
