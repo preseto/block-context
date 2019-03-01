@@ -72,11 +72,11 @@ class BlockContextPlugin {
 		$rule = $block_context->value();
 
 		if ( ! empty( $rule ) ) {
-			$context_matches = $this->block_matches_contexts( $block );
+			$matches_contexts = $this->block_matches_contexts( $block );
 
-			if ( 'show' === $rule && $context_matches ) {
+			if ( 'show' === $rule && $matches_contexts ) {
 				return true;
-			} elseif ( 'hide' === $rule && ! $context_matches ) {
+			} elseif ( 'hide' === $rule && ! $matches_contexts ) {
 				return true;
 			}
 
