@@ -2,63 +2,62 @@
  * Build a WP readme.
  */
 
-var path = require('path');
-var handlebars = require( 'handlebars' );
+const path = require('path');
+const handlebars = require( 'handlebars' );
 
-module.exports = function( grunt ) {
-
-	var formatReadme = function( content ) {
-		var replaceRules = {
-			'#': '=== $1 ===',
-			'##': '== $1 ==',
-			'#{3,}': '= $1 =',
-		};
-
-		// Replace Markdown headings with WP.org style headings
-		Object.keys( replaceRules ).forEach( function( pattern ) {
-			var patternRegExp = [ '^', pattern, '\\s(.+)$' ].join( '' );
-
-			content = content.replace(
-				new RegExp( patternRegExp, 'gm' ),
-				replaceRules[ pattern ]
-			);
-		} );
-
-		return content;
+function formatReadme( content ) {
+	const replaceRules = {
+		'#': '=== $1 ===',
+		'##': '== $1 ==',
+		'#{3,}': '= $1 =',
 	};
 
-	var replaceVars = function( content, vars ) {
-		var template = handlebars.compile( content );
+	// Replace Markdown headings with WP.org style headings
+	Object.keys( replaceRules ).forEach( pattern => {
+		const patternRegExp = [ '^', pattern, '\\s(.+)$' ].join( '' );
 
-		return template( vars );
-	};
+		content = content.replace(
+			new RegExp( patternRegExp, 'gm' ),
+			replaceRules[ pattern ]
+		);
+	} );
 
-	var getPluginVersion = function( pluginSource ) {
-		var pattern = new RegExp( 'Version:\\s*(.+)$', 'mi' );
-		var match = pluginSource.match( pattern );
+	return content;
+};
 
-		if ( match.length ) {
-			return match[1];
-		}
+function replaceVars( content, vars ) {
+	const template = handlebars.compile( content );
 
-		return null;
-	};
+	return template( vars );
+};
 
-	grunt.registerTask( 'readmeMdToTxt', 'Build the readme', function() {
+function getPluginVersion( pluginSource ) {
+	const pattern = new RegExp( 'Version:\\s*(.+)$', 'mi' );
+	const match = pluginSource.match( pattern );
 
-		var options = this.options( {
+	if ( match.length ) {
+		return match[1];
+	}
+
+	return null;
+};
+
+module.exports = ( grunt ) => {
+
+	grunt.registerTask( 'readmeMdToTxt', 'Build the readme', () => {
+		const options = this.options( {
 			src: 'readme.md',
 			dest: 'readme.txt',
 			pluginFile: null,
 		} );
 
-		var pkgConfig = grunt.config.get( 'pkg' );
-		var srcFile = grunt.file.read( options.src );
-		var destDir = path.dirname( options.dest );
+		const pkgConfig = grunt.config.get( 'pkg' );
+		const srcFile = grunt.file.read( options.src );
+		const destDir = path.dirname( options.dest );
 
 		// Extract the version from the main plugin file.
 		if ( 'undefined' === typeof pkgConfig.version ) {
-			var pluginVersion = getPluginVersion( grunt.file.read( options.pluginFile ) );
+			const pluginVersion = getPluginVersion( grunt.file.read( options.pluginFile ) );
 
 			if ( ! pluginVersion ) {
 				grunt.warn( 'Failed to parse the plugin version in the plugin file.' );
@@ -68,7 +67,7 @@ module.exports = function( grunt ) {
 		}
 
 		// Replace all variables.
-		var readmeTxt = replaceVars( srcFile, pkgConfig );
+		const readmeTxt = replaceVars( srcFile, pkgConfig );
 
 		// Ensure we have the destination directory.
 		if ( destDir ) {
@@ -77,7 +76,5 @@ module.exports = function( grunt ) {
 
 		// Write the readme.txt.
 		grunt.file.write( options.dest, formatReadme( readmeTxt ) );
-
 	} );
-
 }

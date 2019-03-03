@@ -1,6 +1,6 @@
-var ignoreParse = require( 'parse-gitignore' );
+const ignoreParse = require( 'parse-gitignore' );
 
-module.exports = function( grunt ) {
+module.exports = ( grunt ) => {
 
 	// Load all Grunt plugins.
 	require( 'load-grunt-tasks' )( grunt );
@@ -8,7 +8,7 @@ module.exports = function( grunt ) {
 	grunt.loadTasks( './scripts/grunt' );
 
 	// Get a list of all the files and directories to exclude from the distribution.
-	var distignore = ignoreParse( '.distignore', {
+	const distignore = ignoreParse( '.distignore', {
 		invert: true,
 	} );
 
