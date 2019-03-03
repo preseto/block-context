@@ -14,8 +14,18 @@ class BlockContextPlugin {
 	 */
 	protected $plugin;
 
+	/**
+	 * Block context store.
+	 *
+	 * @var Preseto\BlockContext\BlockContexts
+	 */
 	protected $contexts;
 
+	/**
+	 * Context that enables the block context.
+	 *
+	 * @var Preseto\BlockContext\BlockContext
+	 */
 	protected $context_rule;
 
 	/**
@@ -81,6 +91,13 @@ class BlockContextPlugin {
 		return $rendered;
 	}
 
+	/**
+	 * Is block currently visible.
+	 *
+	 * @param  Preseto\BlockContext $block Block.
+	 *
+	 * @return boolean
+	 */
 	public function block_is_visible( $block ) {
 		$block_context = new BlockContext( $block, $this->context_rule );
 
