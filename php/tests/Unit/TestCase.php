@@ -6,7 +6,7 @@
  * @see https://github.com/10up/wp_mock/blob/master/php/WP_Mock/Tools/TestCase.php
  */
 
-namespace Preseto\BlockContextTest;
+namespace Preseto\BlockContextTests\Unit;
 
 /**
  * Our own test case.

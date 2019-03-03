@@ -1,6 +1,6 @@
 <?php
 
-namespace Preseto\BlockContextTest;
+namespace Preseto\BlockContextTests\Unit;
 
 /**
  * Basic test.
