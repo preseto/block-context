@@ -1,6 +1,6 @@
-# [<img src="https://blockcontext.com/wp-content/uploads/sites/3/2018/11/block-context-logo.png" alt="Block Conete" width="80" align="left" /> Block Context for Gutenberg](https://blockcontext.com)
+# Block Context for WordPress
 
-**A WordPress plugin to show or hide any Gutenberg block in context.**
+**A WordPress plugin to show or hide WordPress editor (Gutenberg) blocks in context.**
 
 [![Build Status](https://travis-ci.org/preseto/block-context.svg?branch=master)](https://travis-ci.org/preseto/block-context)
 [![Coverage Status](https://coveralls.io/repos/github/preseto/block-context/badge.svg?branch=master)](https://coveralls.io/github/preseto/block-context?branch=master)
