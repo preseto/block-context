@@ -42,10 +42,14 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		zip: {
+		compress: {
 			release: {
-				src: '<%= dist_dir %>',
-				dest: '<%= dist_dir %>.zip',
+				options: {
+					archive: '<%= dist_dir %>.zip',
+				},
+				expand: true,
+				cwd: 'dist',
+				src: 'block-context/**',
 			}
 		},
 
@@ -81,7 +85,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask(
 		'release-zip', [
 			'release',
-			'zip',
+			'compress',
 		]
 	);
 
