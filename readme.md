@@ -47,7 +47,7 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 
 ## Screenshots
 
-TODO
+![Block Context settings](assets/wporg/screenshot-1.png)
 
 
 ## Credits
