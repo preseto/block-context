@@ -10,6 +10,7 @@
     "build": "webpack --mode=production --output=./js/dist/[name].js",
     "dev": "webpack --watch --mode=development --output=./js/dist/[name].js",
     "release": "npm run build && grunt release",
+    "release-zip": "npm run build && grunt release-zip",
     "clean": "grunt clean"
   },
   "license": "GPL-2.0",
@@ -23,6 +24,7 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-wp-deploy": "^2.0.0",
+    "grunt-zip": "^0.18.1",
     "handlebars": "^4.1.0",
     "load-grunt-tasks": "^4.0.0",
     "parse-gitignore": "^0.5",

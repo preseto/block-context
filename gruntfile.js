@@ -42,6 +42,13 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		zip: {
+			release: {
+				src: '<%= dist_dir %>',
+				dest: '<%= dist_dir %>.zip',
+			}
+		},
+
 		wp_deploy: {
 			options: {
 				plugin_slug: 'block-context',
@@ -68,6 +75,13 @@ module.exports = function( grunt ) {
 			'clean:build',
 			'copy',
 			'readmeMdToTxt',
+		]
+	);
+
+	grunt.registerTask(
+		'release-zip', [
+			'release',
+			'zip',
 		]
 	);
 
