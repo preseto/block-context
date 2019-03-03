@@ -1,8 +1,8 @@
 /**
- * Build a WP readme.
+ * Build a WordPress readme.txt file out of a markdown source template.
  */
 
-const path = require('path');
+const path = require( 'path' );
 const handlebars = require( 'handlebars' );
 
 function formatReadme( content ) {
