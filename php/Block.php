@@ -29,7 +29,11 @@ class Block {
 	 * @return array
 	 */
 	public function attributes() {
-		return $this->block['attrs'];
+		if ( isset( $this->block['attrs'] ) && is_array( $this->block['attrs'] ) ) {
+			return $this->block['attrs'];
+		}
+
+		return [];
 	}
 
 	/**
