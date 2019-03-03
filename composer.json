@@ -3,7 +3,7 @@
   "description": "WordPress plugin for showing or hiding Gutenberg blocks depending on context.",
   "homepage": "https://blockcontext.com",
   "type": "wordpress-plugin",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Kaspars Dambis",
