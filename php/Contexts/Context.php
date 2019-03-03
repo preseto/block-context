@@ -10,14 +10,14 @@ abstract class Context {
 	/**
 	 * Block ID.
 	 *
-	 * @var string
+	 * @return string
 	 */
 	abstract public function id();
 
 	/**
 	 * If the current request matches the rule.
 	 *
-	 * @var boolean|null
+	 * @param mixed $state Current context rule state.
 	 */
 	abstract public function match( $state );
 
