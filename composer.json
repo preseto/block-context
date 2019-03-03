@@ -34,6 +34,10 @@
     "autoloader-suffix": "PresetoBlockContext"
   },
   "scripts": {
+    "build": [
+      "@composer validate --no-check-publish --strict",
+      "@composer install --no-dev --prefer-dist --optimize-autoloader --no-scripts"
+    ],
     "lint-php": [
       "./vendor/bin/phpcs ."
     ],

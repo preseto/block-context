@@ -7,8 +7,10 @@
     "url": "https://preseto.com"
   },
   "scripts": {
-    "build": "webpack --mode=production --output=./js/dist/[name].js",
     "dev": "webpack --watch --mode=development --output=./js/dist/[name].js",
+    "build-js": "webpack --mode=production --output=./js/dist/[name].js",
+    "build-php": "composer build",
+    "build": "npm run build-php && npm run build-js",
     "release": "npm run build && grunt release",
     "release-zip": "npm run build && grunt release-zip",
     "clean": "grunt clean"
