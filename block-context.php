@@ -2,10 +2,10 @@
 /**
  * Plugin Name: Block Context
  * Plugin URI: https://blockcontext.com
- * Description: Show or hide Gutenberg blocks in context.
+ * Description: Hide Gutenberg editor blocks in context.
  * Version: 0.1.0
- * Author: Preseto
- * Author URI: https://preseto.com
+ * Author: Kaspars Dambis
+ * Author URI: https://kaspars.net
  * Text Domain: block-context
  */
 
