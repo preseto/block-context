@@ -11,8 +11,8 @@ composer.lock
 docker-compose.yaml
 package.json
 package-lock.json
-phpcs.xml
-phpunit.xml
+phpcs.*
+phpunit.*
 readme.md
 readme.txt.md
 Vagrantfile

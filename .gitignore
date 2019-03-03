@@ -2,4 +2,6 @@
 /vendor
 /.vagrant
 /console.log
+phpcs.xml
+phpunit.xml
 .DS_Store
