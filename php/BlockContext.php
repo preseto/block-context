@@ -50,7 +50,7 @@ class BlockContext {
 	 *
 	 * @return string
 	 */
-	protected function attribute_key() {
+	public function attribute_key() {
 		$id = str_replace( [ '-', '_' ], '', $this->context->id() );
 
 		return sprintf(
