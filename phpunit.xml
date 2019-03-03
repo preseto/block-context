@@ -7,4 +7,12 @@
 			<directory>php/Tests/Unit</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">php</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-clover" target="php/Tests/_logs/clover.xml" />
+	</logging>
 </phpunit>

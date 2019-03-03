@@ -10,5 +10,12 @@ script:
   - composer lint
   - composer test
 
+after_script:
+  - composer test-report
+
 notifications:
   email: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
