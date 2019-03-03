@@ -45,7 +45,7 @@ function getPluginVersion( pluginSource ) {
 module.exports = ( grunt ) => {
 
 	grunt.registerTask( 'readmeMdToTxt', 'Build the readme', () => {
-		const options = this.options( {
+		const options = grunt.options( {
 			src: 'readme.md',
 			dest: 'readme.txt',
 			pluginFile: null,
