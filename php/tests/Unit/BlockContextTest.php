@@ -5,9 +5,14 @@ namespace Preseto\BlockContextTests\Unit;
 use Mockery;
 use Preseto\BlockContext\BlockContext;
 
+/**
+ * Core block and context related tests.
+ */
 class BlockContextTest extends TestCase {
 
 	/**
+	 * Can extract context attribute value.
+	 *
 	 * @covers Preseto\BlockContext\BlockContext::value
 	 */
 	public function test_context_value() {
@@ -27,6 +32,8 @@ class BlockContextTest extends TestCase {
 	}
 
 	/**
+	 * Can format context attribute ID.
+	 *
 	 * @covers Preseto\BlockContext\BlockContext::attribute_key
 	 */
 	public function test_attribute_key() {
