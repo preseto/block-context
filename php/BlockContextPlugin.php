@@ -64,6 +64,8 @@ class BlockContextPlugin {
 			$this->plugin->asset_url( 'js/dist/editor.js' ),
 			[
 				'wp-compose',
+				'wp-hooks',
+				'wp-i18n',
 				'wp-element',
 				'wp-editor',
 				'wp-components',
