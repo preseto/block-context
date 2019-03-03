@@ -30,6 +30,9 @@
       "Preseto\\BlockContextTest\\": "php/tests/"
     }
   },
+  "config": {
+    "autoloader-suffix": "PresetoBlockContext"
+  },
   "scripts": {
     "lint-php": [
       "./vendor/bin/phpcs ."
