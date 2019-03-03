@@ -20,6 +20,7 @@ module.exports = function( grunt ) {
 		clean: {
 			build: [
 				'<%= dist_dir %>',
+				'dist/zips',
 			],
 			js: [
 				'js/dist',
@@ -45,7 +46,7 @@ module.exports = function( grunt ) {
 		compress: {
 			release: {
 				options: {
-					archive: '<%= dist_dir %>.zip',
+					archive: 'dist/zips/block-context.zip',
 				},
 				expand: true,
 				cwd: 'dist',
