@@ -6,7 +6,6 @@
  * Version: 0.1.0
  * Author: Preseto
  * Author URI: https://preseto.com
- * Requires PHP: 5.3
  * Text Domain: block-context
  */
 
