@@ -44,8 +44,8 @@ function getPluginVersion( pluginSource ) {
 
 module.exports = ( grunt ) => {
 
-	grunt.registerTask( 'readmeMdToTxt', 'Build the readme', () => {
-		const options = grunt.options( {
+	grunt.registerTask( 'readmeMdToTxt', 'Convert a Markdown readme into WordPress readme', function() {
+		const options = this.options( {
 			src: 'readme.md',
 			dest: 'readme.txt',
 			pluginFile: null,
