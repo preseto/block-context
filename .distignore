@@ -2,7 +2,6 @@
 /dist/
 /scripts/
 /js/src/
-/vendor/
 /node_modules/
 /.vagrant/
 /assets/
