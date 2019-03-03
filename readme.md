@@ -3,6 +3,7 @@
 **A WordPress plugin to show or hide any Gutenberg block in context.**
 
 [![Build Status](https://travis-ci.org/preseto/block-context.svg?branch=master)](https://travis-ci.org/preseto/block-context)
+[![Coverage Status](https://coveralls.io/repos/github/preseto/block-context/badge.svg?branch=master)](https://coveralls.io/github/preseto/block-context?branch=master)
 
 Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for WordPress.
 
