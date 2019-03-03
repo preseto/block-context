@@ -10,7 +10,7 @@
     "build": "webpack --mode=production --output=./js/dist/[name].js",
     "dev": "webpack --watch --mode=development --output=./js/dist/[name].js",
     "release": "npm run build && grunt release",
-    "release-zip": "npm run build && grunt release-zip",
+    "release-zip": "npm run release-zip",
     "clean": "grunt clean"
   },
   "license": "GPL-2.0",
