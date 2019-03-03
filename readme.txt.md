@@ -25,7 +25,6 @@ Change Gutenberg block visibility for specific users.
 ## Installation
 
 - Search for "Block Context" under "Plugins → Add New" in your WordPress dashboard.
-
 - Block Context settings will appear in **each block** settings.
 
 
