@@ -24,6 +24,11 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 	  composer require preseto/block-context
 
 
+## Feature Roadmap
+
+See [the roadmap](https://github.com/preseto/block-context/projects/1).
+
+
 ## Development
 
 1. Clone the plugin repository:
