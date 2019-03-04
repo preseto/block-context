@@ -36,9 +36,9 @@ See [the roadmap](https://github.com/preseto/block-context/projects/1).
 	   git clone https://github.com/preseto/block-context.git
 	   cd block-context
 
-2. Setup the development environment and tools using [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org):
+2. Setup the development environment and tools using [Node.js](https://nodejs.org) and [Composer](https://getcomposer.org):
 
-	   composer install
+	   npm install
 
 3. Start a virtual testing environment using [Vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/):
 
@@ -48,7 +48,7 @@ See [the roadmap](https://github.com/preseto/block-context/projects/1).
 
 4. Build the plugin JS and CSS assets:
 
-	   composer build
+	   npm run build
 
 
 ## Screenshots
