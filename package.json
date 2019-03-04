@@ -13,8 +13,8 @@
     "build": "npm run build-php && npm run build-js",
     "release": "npm run build && grunt release",
     "release-zip": "npm run build && grunt release-zip",
-    "deploy": "grunt deploy",
-    "deploy-trunk": "grunt deploy-trunk",
+    "deploy": "npm run build && grunt deploy",
+    "deploy-trunk": "npm run build && grunt deploy-trunk",
     "clean": "grunt clean"
   },
   "license": "GPL-2.0",
