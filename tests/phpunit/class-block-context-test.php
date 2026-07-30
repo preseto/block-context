@@ -24,11 +24,11 @@ class BlockContextTest extends \WP_UnitTestCase {
 				$this->id = $id;
 			}
 
-			public function id() {
+			public function id(): string {
 				return $this->id;
 			}
 
-			public function match( $state ) {
+			public function match( string $state ): ?bool {
 				return null;
 			}
 		};

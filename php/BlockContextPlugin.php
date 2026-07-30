@@ -12,28 +12,28 @@ class BlockContextPlugin {
 	 *
 	 * @var \Preseto\BlockContext\Plugin
 	 */
-	protected $plugin;
+	protected Plugin $plugin;
 
 	/**
 	 * Block context store.
 	 *
 	 * @var \Preseto\BlockContext\BlockContexts
 	 */
-	protected $contexts;
+	protected BlockContexts $contexts;
 
 	/**
 	 * Context that enables the block context.
 	 *
-	 * @var \Preseto\BlockContext\Contexts\Context
+	 * @var \Preseto\BlockContext\Contexts\ContextRule
 	 */
-	protected $context_rule;
+	protected Contexts\ContextRule $context_rule;
 
 	/**
 	 * Setup the plugin instance.
 	 *
 	 * @param \Preseto\BlockContext\Plugin $plugin Instance of the plugin abstraction.
 	 */
-	public function __construct( $plugin ) {
+	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 
 		$this->context_rule = new Contexts\ContextRule();
@@ -46,7 +46,7 @@ class BlockContextPlugin {
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function init(): void {
 		$this->contexts->add( new Contexts\UserLoggedIn() );
 
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
@@ -58,7 +58,7 @@ class BlockContextPlugin {
 	 *
 	 * @return void
 	 */
-	public function enqueue_editor_assets() {
+	public function enqueue_editor_assets(): void {
 		$asset = [
 			'dependencies' => [],
 			'version' => $this->plugin->asset_version(),
@@ -91,7 +91,7 @@ class BlockContextPlugin {
 	 *
 	 * @return string
 	 */
-	public function maybe_hide_block( $rendered, $block_data ) {
+	public function maybe_hide_block( string $rendered, array $block_data ): string {
 		$block = new Block( $block_data );
 
 		if ( ! $this->block_is_visible( $block ) ) {
@@ -108,7 +108,7 @@ class BlockContextPlugin {
 	 *
 	 * @return boolean
 	 */
-	public function block_is_visible( $block ) {
+	public function block_is_visible( Block $block ): bool {
 		$block_context = new BlockContext( $block, $this->context_rule );
 
 		$rule = $block_context->value();
@@ -135,7 +135,7 @@ class BlockContextPlugin {
 	 *
 	 * @return boolean
 	 */
-	public function block_matches_contexts( $block ) {
+	public function block_matches_contexts( Block $block ): bool {
 		foreach ( $this->contexts->all() as $context ) {
 			$block_context = new BlockContext( $block, $context );
 

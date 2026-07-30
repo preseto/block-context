@@ -12,12 +12,12 @@ abstract class Context {
 	 *
 	 * @return string
 	 */
-	abstract public function id();
+	abstract public function id(): string;
 
 	/**
 	 * If the current request matches the rule.
 	 *
-	 * @param mixed $state Current context rule state.
+	 * @param string $state Current context rule state.
 	 */
-	abstract public function match( $state );
+	abstract public function match( string $state ): ?bool;
 }

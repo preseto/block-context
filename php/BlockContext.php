@@ -19,14 +19,14 @@ class BlockContext {
 	 *
 	 * @var \Preseto\BlockContext\Block
 	 */
-	protected $block;
+	protected Block $block;
 
 	/**
 	 * Context rule instance.
 	 *
 	 * @var \Preseto\BlockContext\Contexts\Context
 	 */
-	protected $context;
+	protected Contexts\Context $context;
 
 	/**
 	 * Setup a block in context.
@@ -34,7 +34,7 @@ class BlockContext {
 	 * @param \Preseto\BlockContext\Block            $block   Block.
 	 * @param \Preseto\BlockContext\Contexts\Context $context Context rule.
 	 */
-	public function __construct( $block, $context ) {
+	public function __construct( Block $block, Contexts\Context $context ) {
 		$this->block = $block;
 		$this->context = $context;
 	}
@@ -44,7 +44,7 @@ class BlockContext {
 	 *
 	 * @return boolean
 	 */
-	public function matches() {
+	public function matches(): bool {
 		$value = $this->value();
 
 		return ( null !== $value && $this->context->match( $value ) );
@@ -64,7 +64,7 @@ class BlockContext {
 	 *
 	 * @return string
 	 */
-	public function attribute_key() {
+	public function attribute_key(): string {
 		$id = str_replace( [ '-', '_' ], '', $this->context->id() );
 
 		return sprintf(

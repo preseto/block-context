@@ -12,14 +12,14 @@ class Block {
 	 *
 	 * @var array
 	 */
-	protected $block;
+	protected array $block;
 
 	/**
 	 * Setup the block.
 	 *
 	 * @param array $block Block settings from WP.
 	 */
-	public function __construct( $block ) {
+	public function __construct( array $block ) {
 		$this->block = $block;
 	}
 
@@ -28,7 +28,7 @@ class Block {
 	 *
 	 * @return array
 	 */
-	public function attributes() {
+	public function attributes(): array {
 		if ( isset( $this->block['attrs'] ) && is_array( $this->block['attrs'] ) ) {
 			return $this->block['attrs'];
 		}
@@ -43,7 +43,7 @@ class Block {
 	 *
 	 * @return mixed Return `null` if attribute not found.
 	 */
-	public function attribute( $key ) {
+	public function attribute( string $key ) {
 		$attributes = $this->attributes();
 
 		if ( isset( $attributes[ $key ] ) ) {
