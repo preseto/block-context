@@ -2,7 +2,7 @@
 
 Contributors: kasparsd  
 Tags: gutenberg, blocks, block, visibility, formatting  
-Requires PHP: 5.3  
+Requires PHP: 7.4  
 Requires at least: 3.0  
 Tested up to: 7.0  
 Stable tag: {{ version }}  
