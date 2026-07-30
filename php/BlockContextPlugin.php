@@ -17,14 +17,14 @@ class BlockContextPlugin {
 	/**
 	 * Block context store.
 	 *
-	 * @var Preseto\BlockContext\BlockContexts
+	 * @var \Preseto\BlockContext\BlockContexts
 	 */
 	protected $contexts;
 
 	/**
 	 * Context that enables the block context.
 	 *
-	 * @var Preseto\BlockContext\BlockContext
+	 * @var \Preseto\BlockContext\Contexts\Context
 	 */
 	protected $context_rule;
 
@@ -59,19 +59,27 @@ class BlockContextPlugin {
 	 * @return void
 	 */
 	public function enqueue_editor_assets() {
+		$asset = [
+			'dependencies' => [],
+			'version' => $this->plugin->asset_version(),
+		];
+
+		$asset_file = sprintf( '%s/build/editor.asset.php', $this->plugin->dir() );
+
+		if ( is_readable( $asset_file ) ) {
+			$asset_meta = include $asset_file;
+
+			if ( is_array( $asset_meta ) ) {
+				$asset = array_merge( $asset, $asset_meta );
+			}
+		}
+
 		wp_enqueue_script(
 			'preseto-block-context-editor-js',
-			$this->plugin->asset_url( 'js/dist/editor.js' ),
-			[
-				'wp-compose',
-				'wp-hooks',
-				'wp-i18n',
-				'wp-element',
-				'wp-editor',
-				'wp-components',
-				'lodash',
-			],
-			$this->plugin->asset_version()
+			$this->plugin->asset_url( 'build/editor.js' ),
+			$asset['dependencies'],
+			$asset['version'],
+			true
 		);
 	}
 
@@ -96,7 +104,7 @@ class BlockContextPlugin {
 	/**
 	 * Is block currently visible.
 	 *
-	 * @param  Preseto\BlockContext $block Block.
+	 * @param  \Preseto\BlockContext\Block $block Block.
 	 *
 	 * @return boolean
 	 */
@@ -123,7 +131,7 @@ class BlockContextPlugin {
 	/**
 	 * Check if a block matches any of the context rules.
 	 *
-	 * @param  Preseto\BlockContext\Block $block Instance of a block.
+	 * @param  \Preseto\BlockContext\Block $block Instance of a block.
 	 *
 	 * @return boolean
 	 */
@@ -138,5 +146,4 @@ class BlockContextPlugin {
 
 		return false;
 	}
-
 }
