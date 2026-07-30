@@ -42,19 +42,19 @@
       "@composer install --no-dev --prefer-dist --optimize-autoloader --no-scripts"
     ],
     "lint-php": [
-      "./vendor/bin/phpcs ."
+      "phpcs ."
     ],
     "lint": [
       "@lint-php"
     ],
     "test-php": [
-      "./vendor/bin/phpunit"
+      "phpunit"
     ],
     "test": [
       "@test-php"
     ],
     "test-report": [
-      "vendor/bin/php-coveralls -v"
+      "php-coveralls -v"
     ],
     "post-install-cmd": [
       "npm install"
