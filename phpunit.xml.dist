@@ -1,18 +1,28 @@
+<?xml version="1.0"?>
 <phpunit
+	bootstrap="tests/phpunit-bootstrap.php"
+	cacheResultFile=".cache/.phpunit.result.cache"
+	backupGlobals="false"
 	colors="true"
-	bootstrap="php/Tests/bootstrap.php"
-	>
+>
+	<php>
+		<env name="WP_PHPUNIT__TESTS_CONFIG" value="tests/wp-tests-config.php" />
+		<env name="WP_PHPUNIT__TABLE_PREFIX" value="tests_" />
+	</php>
 	<testsuites>
-		<testsuite name="Unit Tests">
-			<directory>php/Tests/Unit</directory>
+		<testsuite name="plugin">
+			<directory suffix="-test.php">tests/phpunit</directory>
 		</testsuite>
 	</testsuites>
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
+	<coverage processUncoveredFiles="true" cacheDirectory=".cache/phpunit-coverage">
+		<include>
 			<directory suffix=".php">php</directory>
-		</whitelist>
-	</filter>
-	<logging>
-		<log type="coverage-clover" target="php/Tests/_logs/clover.xml" />
-	</logging>
+			<file>block-context.php</file>
+		</include>
+		<report>
+			<cobertura outputFile="tests/coverage/phpunit-cobertura.xml" />
+			<php outputFile="tests/coverage/phpunit.cov" />
+			<text outputFile="tests/coverage/phpunit.txt" />
+		</report>
+	</coverage>
 </phpunit>

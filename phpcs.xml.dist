@@ -1,21 +1,37 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Coding Standards">
-	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
-
-	<rule ref="WordPress-Core">
-		<exclude name="WordPress.Arrays.MultipleStatementAlignment" />
-		<exclude name="Generic.Formatting.MultipleStatementAlignment" />
-		<exclude name="WordPress.Files.FileName" />
-	</rule>
-
-	<rule ref="WordPress-Docs">
-		<exclude name="Squiz.Commenting.FileComment" />
-	</rule>
-
 	<arg name="extensions" value="php" />
 	<arg name="colors" />
-	<arg value="s" /><!-- Show sniff codes in all reports -->
+	<arg name="parallel" value="16" />
+	<arg value="s" /><!-- Show sniff codes in all reports. -->
+	<arg value="p" /><!-- Show progress. -->
 
+	<file>.</file>
+
+	<rule ref="WordPress-Core">
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found" /><!-- We enforce short syntax, see below. -->
+		<exclude name="Generic.Commenting.DocComment.MissingShort" />
+		<exclude name="Generic.Formatting.MultipleStatementAlignment" />
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment" />
+		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
+		<exclude name="WordPress.Files.FileName" /><!-- We use PSR-4 file names. -->
+	</rule>
+
+	<!-- Enforce short array syntax -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
+		<type>warning</type>
+	</rule>
+
+	<!-- Ensure all code works with PHP 7.4 and above. -->
+	<rule ref="PHPCompatibilityWP" />
+	<config name="testVersion" value="7.4-" />
+
+	<exclude-pattern>/.cache/</exclude-pattern>
+	<exclude-pattern>/build/</exclude-pattern>
+	<exclude-pattern>/dist/</exclude-pattern>
 	<exclude-pattern>/node_modules/</exclude-pattern>
+	<exclude-pattern>/tests/coverage/</exclude-pattern>
 	<exclude-pattern>/vendor/</exclude-pattern>
+	<exclude-pattern>/wordpress/</exclude-pattern>
+	<exclude-pattern>/wp-content/</exclude-pattern>
 </ruleset>

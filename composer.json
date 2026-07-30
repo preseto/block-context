@@ -1,66 +1,59 @@
 {
-  "name": "preseto/block-context",
-  "description": "WordPress plugin for showing or hiding Gutenberg blocks depending on context.",
-  "homepage": "https://blockcontext.com",
-  "type": "wordpress-plugin",
-  "license": "GPL-2.0-or-later",
-  "authors": [
-    {
-      "name": "Kaspars Dambis",
-      "homepage": "https://preseto.com"
-    }
-  ],
-  "support": {
-    "issues": "https://github.com/preseto/block-context/issues",
-    "source": "https://github.com/preseto/block-context"
-  },
-  "require": {
-  },
-  "require-dev": {
-    "wp-coding-standards/wpcs": "^1.2",
-    "10up/wp_mock": "^0.3.0",
-    "wpsh/local": "^0.1.1",
-    "php-coveralls/php-coveralls": "^2.1",
-    "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Preseto\\BlockContext\\": "php/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Preseto\\BlockContextTests\\": "php/Tests/"
-    }
-  },
-  "config": {
-    "autoloader-suffix": "PresetoBlockContext"
-  },
-  "scripts": {
-    "build": [
-      "@composer validate --no-check-publish --strict",
-      "@composer install --no-dev --prefer-dist --optimize-autoloader --no-scripts"
-    ],
-    "lint-php": [
-      "phpcs ."
-    ],
-    "lint": [
-      "@lint-php"
-    ],
-    "test-php": [
-      "phpunit"
-    ],
-    "test": [
-      "@test-php"
-    ],
-    "test-report": [
-      "php-coveralls -v"
-    ],
-    "post-install-cmd": [
-      "npm install"
-    ],
-    "post-update-cmd": [
-      "npm install"
-    ]
-  }
+	"name": "preseto/block-context",
+	"description": "WordPress plugin for showing or hiding Gutenberg blocks depending on context.",
+	"homepage": "https://blockcontext.com",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Kaspars Dambis",
+			"homepage": "https://preseto.com"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/preseto/block-context/issues",
+		"source": "https://github.com/preseto/block-context"
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"platform": {
+			"php": "7.4"
+		},
+		"sort-packages": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"roots/wordpress-core-installer": true
+		}
+	},
+	"require-dev": {
+		"phpcompatibility/phpcompatibility-wp": "^3.0",
+		"phpstan/phpstan": "^2.2",
+		"phpunit/phpunit": "^9.6",
+		"roots/wordpress": "^7.0",
+		"roots/wordpress-core-installer": "^4.0",
+		"wp-cli/wp-cli-bundle": "^2.12",
+		"wp-coding-standards/wpcs": "^3.3",
+		"wp-phpunit/wp-phpunit": "^7.0",
+		"yoast/phpunit-polyfills": "^4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Preseto\\BlockContext\\": "php/"
+		}
+	},
+	"scripts": {
+		"test": "phpunit",
+		"lint": [
+			"@lint:phpcs",
+			"@lint:phpstan"
+		],
+		"lint:phpcs": "phpcs",
+		"lint:phpstan": "phpstan --memory-limit=4G",
+		"format": [
+			"@format:phpcs"
+		],
+		"format:phpcs": "phpcbf",
+		"wp": "wp"
+	}
 }
