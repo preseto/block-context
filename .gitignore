@@ -1,7 +1,13 @@
 /node_modules
 /vendor
-/.vagrant
-/console.log
+/wordpress
+/wp-content
+/build
+/dist
+/.cache
+/tests/coverage
+
+.phpunit.result.cache
 phpcs.xml
 phpunit.xml
 .DS_Store

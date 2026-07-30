@@ -2,9 +2,6 @@
 
 **A WordPress plugin to show or hide WordPress editor (Gutenberg) blocks in context.**
 
-[![Build Status](https://travis-ci.org/preseto/block-context.svg?branch=master)](https://travis-ci.org/preseto/block-context)
-[![Coverage Status](https://coveralls.io/repos/github/preseto/block-context/badge.svg?branch=master)](https://coveralls.io/github/preseto/block-context?branch=master)
-
 Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for WordPress.
 
 
@@ -12,7 +9,7 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 
 - WordPress 5.0+ or the [Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/).
 - [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org) for dependency management.
-- [Vagrant](https://www.vagrantup.com) and [VirtualBox](https://www.virtualbox.org) for local testing environment.
+- [Docker](https://www.docker.com) for the local development environment.
 
 
 ## Install
@@ -39,16 +36,26 @@ See [the roadmap](https://github.com/preseto/block-context/projects/1).
 2. Setup the development environment and tools using [Node.js](https://nodejs.org) and [Composer](https://getcomposer.org):
 
 	   npm install
+	   composer install
 
-3. Start a virtual testing environment using [Vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/):
+3. Start the local development environment (powered by [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)):
 
-	   vagrant up
+	   npm run start
 
-	which will be available at [http://blockcontext.local](http://blockcontext.local) after provisioning (username: `admin`, password: `password`).
+	which will be available at [http://localhost:8888](http://localhost:8888) (username: `admin`, password: `password`). WordPress core files are installed as the [`roots/wordpress`](https://roots.io/wordpress/) Composer dependency under `wordpress/`.
 
-4. Build the plugin JS and CSS assets:
+4. Build the plugin assets during development:
+
+	   npm run dev
+
+	or produce a production build:
 
 	   npm run build
+
+5. Lint and test the changes:
+
+	   npm run lint
+	   npm run test
 
 
 ## Screenshots
