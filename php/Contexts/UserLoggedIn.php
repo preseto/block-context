@@ -33,5 +33,4 @@ class UserLoggedIn extends Context {
 
 		return ( isset( $rules[ $state ] ) && true === $rules[ $state ] );
 	}
-
 }

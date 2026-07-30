@@ -39,7 +39,7 @@ class BlockContexts {
 	/**
 	 * Add a context.
 	 *
-	 * @param Preseto\BlockContext\BlockContext $context Block Context to add.
+	 * @param \Preseto\BlockContext\Contexts\Context $context Block Context to add.
 	 */
 	public function add( $context ) {
 		$this->contexts[ $context->id() ] = $context;
@@ -50,7 +50,7 @@ class BlockContexts {
 	 *
 	 * @param  string $id Block context ID.
 	 *
-	 * @return Preseto\BlockContext\BlockContext|null
+	 * @return \Preseto\BlockContext\Contexts\Context|null
 	 */
 	public function get( $id ) {
 		if ( isset( $this->contexts[ $id ] ) ) {
@@ -59,5 +59,4 @@ class BlockContexts {
 
 		return null;
 	}
-
 }

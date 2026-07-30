@@ -15,10 +15,24 @@ class BlockContext {
 	const CONTEXT_ID_PREFIX = 'blockContext';
 
 	/**
+	 * Block instance.
+	 *
+	 * @var \Preseto\BlockContext\Block
+	 */
+	protected $block;
+
+	/**
+	 * Context rule instance.
+	 *
+	 * @var \Preseto\BlockContext\Contexts\Context
+	 */
+	protected $context;
+
+	/**
 	 * Setup a block in context.
 	 *
-	 * @param Preseto\BlockContext\Block        $block   Block.
-	 * @param Preseto\BlockContext\BlockContext $context Context rule.
+	 * @param \Preseto\BlockContext\Block            $block   Block.
+	 * @param \Preseto\BlockContext\Contexts\Context $context Context rule.
 	 */
 	public function __construct( $block, $context ) {
 		$this->block = $block;
@@ -59,5 +73,4 @@ class BlockContext {
 			ucwords( $id )
 		);
 	}
-
 }

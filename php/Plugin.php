@@ -99,7 +99,7 @@ class Plugin {
 	/**
 	 * Get absolute path to a file in the uploads directory.
 	 *
-	 * @param  strign $path_relative File path relative to the root of the WordPress uploads directory.
+	 * @param  string $path_relative File path relative to the root of the WordPress uploads directory.
 	 *
 	 * @return string
 	 */
@@ -132,7 +132,7 @@ class Plugin {
 	 * @return boolean
 	 */
 	public function is_debug() {
-		return ( defined( 'WP_DEBUG' ) && WP_DEBUG );
+		return ( defined( 'WP_DEBUG' ) && (bool) constant( 'WP_DEBUG' ) );
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Plugin {
 	 * @return boolean
 	 */
 	public function is_script_debug() {
-		return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+		return ( defined( 'SCRIPT_DEBUG' ) && (bool) constant( 'SCRIPT_DEBUG' ) );
 	}
 
 	/**
@@ -156,7 +156,7 @@ class Plugin {
 	/**
 	 * Sync the plugin version with the asset version.
 	 *
-	 * @return string
+	 * @return string|int
 	 */
 	public function asset_version() {
 		if ( $this->is_debug() || $this->is_script_debug() ) {
@@ -190,5 +190,4 @@ class Plugin {
 
 		return $meta;
 	}
-
 }

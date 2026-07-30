@@ -26,5 +26,4 @@ class ContextRule extends Context {
 	public function match( $state ) {
 		return null;
 	}
-
 }

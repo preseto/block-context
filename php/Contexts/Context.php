@@ -20,5 +20,4 @@ abstract class Context {
 	 * @param mixed $state Current context rule state.
 	 */
 	abstract public function match( $state );
-
 }
