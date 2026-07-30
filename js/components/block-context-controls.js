@@ -1,8 +1,8 @@
-import BlockContext from './block-context';
+import { InspectorControls } from '@wordpress/block-editor';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { Fragment } from '@wordpress/element';
 
-const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.editor;
-const { Fragment } = wp.element;
+import BlockContext from './block-context';
 
 export default createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {

@@ -1,7 +1,5 @@
-const { assign } = lodash;
-
 export default ( settings ) => {
-	settings.attributes = assign( settings.attributes, {
+	settings.attributes = Object.assign( settings.attributes, {
 		blockContextContextRule: {
 			type: 'string',
 		},
@@ -11,4 +9,4 @@ export default ( settings ) => {
 	} );
 
 	return settings;
-}
+};
