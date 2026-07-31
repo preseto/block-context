@@ -81,25 +81,58 @@ class Plugin {
 	}
 
 	/**
-	 * Get the public URL to the asset file.
+	 * Get the asset path.
 	 *
-	 * @param string $asset_path_relative Relative path to the asset file.
+	 * @param ?string $path_relative Optional path relative to the plugin directory.
+	 *
+	 * @return string Absolute path to the asset file or the plugin directory.
 	 */
-	public function asset_url( string $asset_path_relative ): string {
-		static $plugin_basename;
-
-		// Do this only once per every request to save some processing time.
-		if ( ! isset( $plugin_basename ) ) {
-			$plugin_basename = $this->basename( $this->dir() );
+	public function asset_path( ?string $path_relative = null ): string {
+		if ( isset( $path_relative ) ) {
+			return sprintf( '%s/%s', $this->dir, ltrim( $path_relative, '/' ) );
 		}
 
-		$file_path = sprintf(
-			'%s/%s',
-			$plugin_basename,
-			ltrim( $asset_path_relative, '/' )
+		return $this->dir;
+	}
+
+	/**
+	 * Get the public URL to the asset file.
+	 *
+	 * @param string|null $path_relative Relative path to the asset file.
+	 */
+	public function asset_url( ?string $path_relative = null ): string {
+		if ( isset( $path_relative ) ) {
+			return plugins_url( ltrim( $path_relative, '/' ), $this->file );
+		}
+
+		return plugins_url( '', $this->file );
+	}
+
+	public function asset_meta( string $path_relative ): array {
+		$meta = [
+			'url' => $this->asset_url( $path_relative ),
+			'path' => $this->asset_path( $path_relative ),
+			'dependencies' => [],
+			'version' => null,
+		];
+
+		$meta_path = $this->asset_path(
+			sprintf(
+				'%s/%s.asset.php',
+				dirname( $path_relative ),
+				pathinfo( $path_relative, PATHINFO_FILENAME )
+			)
 		);
 
-		return plugins_url( $file_path );
+		if ( is_readable( $meta_path ) ) {
+			$build_meta = include $meta_path;
+
+			return array_merge( $meta, $build_meta );
+		} elseif ( is_readable( $meta['path'] ) ) {
+			$meta['version'] = filemtime( $meta['path'] );
+		}
+
+		return $meta;
 	}
 
 	/**
