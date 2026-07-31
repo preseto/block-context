@@ -6,7 +6,6 @@ namespace Preseto\BlockContext;
  * WordPress plugin interface.
  */
 class Plugin {
-
 	/**
 	 * Absolute path to the main plugin file.
 	 *
@@ -20,6 +19,13 @@ class Plugin {
 	 * @var string
 	 */
 	protected string $dir;
+
+	/**
+	 * Plugin header meta.
+	 *
+	 * @var array
+	 */
+	protected array $meta;
 
 	/**
 	 * Store the WP uploads dir object.
@@ -169,25 +175,23 @@ class Plugin {
 	/**
 	 * Get plugin meta data.
 	 *
-	 * @param  string $field Optional field key.
+	 * @param string $field Optional field key.
 	 *
 	 * @return array|string|null
 	 */
 	public function meta( ?string $field = null ) {
-		static $meta;
-
-		if ( ! isset( $meta ) ) {
-			$meta = get_plugin_data( $this->file );
+		if ( ! isset( $this->meta ) ) {
+			$this->meta = get_plugin_data( $this->file );
 		}
 
 		if ( isset( $field ) ) {
-			if ( isset( $meta[ $field ] ) ) {
-				return $meta[ $field ];
+			if ( isset( $this->meta[ $field ] ) ) {
+				return $this->meta[ $field ];
 			}
 
 			return null;
 		}
 
-		return $meta;
+		return $this->meta;
 	}
 }
