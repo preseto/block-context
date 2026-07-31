@@ -6,7 +6,7 @@ parameters:
 		- tests
 		- block-context.php
 	scanDirectories:
-		- wordpress
+		- tools/wordpress
 		- vendor
 	ignoreErrors:
 		- # WP core defines these in scanned files but they are user-configurable at runtime.
