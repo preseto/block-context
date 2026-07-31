@@ -11,27 +11,17 @@ Source of the [Gutenberg Block Context plugin](https://blockcontext.com) for Wor
 - [Composer](https://getcomposer.org) and [Node.js](https://nodejs.org) for dependency management.
 - [Docker](https://www.docker.com) for the local development environment.
 
-
 ## Install
 
 - Search for "Block Context" under "Plugins → Add New" in your WordPress dashboard.
 
 - Install as a [Composer](https://packagist.org/packages/preseto/block-context) dependency:
 
-	  composer require preseto/block-context
-
-
-## Feature Roadmap
-
-See [the roadmap](https://github.com/preseto/block-context/projects/1).
-
+	   composer require preseto/block-context
 
 ## Development
 
-1. Clone the plugin repository:
-
-	   git clone https://github.com/preseto/block-context.git
-	   cd block-context
+1. Clone the plugin repository.
 
 2. Setup the development environment and tools using [Node.js](https://nodejs.org) and [Composer](https://getcomposer.org):
 
