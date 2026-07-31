@@ -16,14 +16,36 @@
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*",
+				"wpackagist-theme/*"
+			]
+		}
+	],
 	"config": {
 		"platform": {
 			"php": "7.4"
 		},
 		"sort-packages": true,
 		"allow-plugins": {
+			"composer/installers": true,
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"roots/wordpress-core-installer": true
+		}
+	},
+	"extra": {
+		"wordpress-install-dir": "tools/wordpress",
+		"installer-paths": {
+			"tools/wp-content/plugins/{$name}/": [
+				"type:wordpress-plugin"
+			],
+			"tools/wp-content/themes/{$name}/": [
+				"type:wordpress-theme"
+			]
 		}
 	},
 	"require-dev": {
@@ -35,6 +57,7 @@
 		"wp-cli/wp-cli-bundle": "^2.12",
 		"wp-coding-standards/wpcs": "^3.3",
 		"wp-phpunit/wp-phpunit": "^7.0",
+		"wpackagist-plugin/query-monitor": "^4.0",
 		"yoast/phpunit-polyfills": "^4.0"
 	},
 	"autoload": {

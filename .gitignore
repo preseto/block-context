@@ -1,7 +1,5 @@
 /node_modules
 /vendor
-/wordpress
-/wp-content
 /build
 /dist
 /.cache

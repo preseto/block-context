@@ -2,11 +2,9 @@
 	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
 	"testsEnvironment": false,
 	"phpVersion": "7.4",
-	"core": "./wordpress",
-	"plugins": [
-		"https://downloads.wordpress.org/plugin/query-monitor.latest-stable.zip"
-	],
+	"core": "./tools/wordpress",
 	"mappings": {
+		"wp-content": "./tools/wp-content",
 		"wp-content/plugins/block-context": "."
 	},
 	"config": {
