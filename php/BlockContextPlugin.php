@@ -59,24 +59,11 @@ class BlockContextPlugin {
 	 * @return void
 	 */
 	public function enqueue_editor_assets(): void {
-		$asset = [
-			'dependencies' => [],
-			'version' => $this->plugin->asset_version(),
-		];
-
-		$asset_file = sprintf( '%s/build/editor.asset.php', $this->plugin->dir() );
-
-		if ( is_readable( $asset_file ) ) {
-			$asset_meta = include $asset_file;
-
-			if ( is_array( $asset_meta ) ) {
-				$asset = array_merge( $asset, $asset_meta );
-			}
-		}
+		$asset = $this->plugin->asset_meta( 'build/editor.js' );
 
 		wp_enqueue_script(
 			'preseto-block-context-editor-js',
-			$this->plugin->asset_url( 'build/editor.js' ),
+			$asset['url'],
 			$asset['dependencies'],
 			$asset['version'],
 			true
