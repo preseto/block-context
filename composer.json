@@ -58,6 +58,7 @@
 		"wp-coding-standards/wpcs": "^3.3",
 		"wp-phpunit/wp-phpunit": "^7.0",
 		"wpackagist-plugin/query-monitor": "^4.0",
+		"wpackagist-theme/twentytwentyfive": "^1.5",
 		"yoast/phpunit-polyfills": "^4.0"
 	},
 	"autoload": {
