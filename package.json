@@ -18,6 +18,7 @@
 	"scripts": {
 		"start": "wp-env start --xdebug=debug,coverage",
 		"stop": "wp-env stop",
+		"cli": "wp-env run cli --env-cwd=wp-content/plugins/block-context",
 		"dev": "wp-scripts start js/editor.js",
 		"build": "npm-run-all build:*",
 		"build:js": "wp-scripts build js/editor.js",
@@ -31,6 +32,8 @@
 		"test": "npm-run-all test:*",
 		"test:js": "wp-scripts test-unit-js js --passWithNoTests",
 		"test:php": "npm run cli -- composer test",
-		"cli": "wp-env run cli --env-cwd=wp-content/plugins/block-context"
+		"release": "npm-run-all release:*",
+		"release:build": "npm run build",
+		"release:zip": "php tools/release.php"
 	}
 }
