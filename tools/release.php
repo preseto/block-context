@@ -3,8 +3,7 @@
 $plugin_slug = 'block-context';
 
 $root_dir = dirname( __DIR__ );
-$target_default = sprintf( '%s/%s.zip', $root_dir, $plugin_slug );
-$target = isset( $argv[1] ) ? $argv[1] : $target_default;
+$target = sprintf( '%s/%s.zip', $root_dir, $plugin_slug );
 
 /**
  * Parse .distignore patterns.
