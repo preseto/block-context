@@ -75,8 +75,6 @@ jobs:
       - uses: actions/checkout@v7
 
       - uses: actions/download-artifact@v8
-        with:
-          name: block-context.zip
 
       - name: Unzip release
         run: |
