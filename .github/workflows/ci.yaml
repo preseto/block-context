@@ -18,7 +18,7 @@ jobs:
     name: Lint and Test
     runs-on: ubuntu-24.04
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
       checks: write
     steps:
@@ -69,6 +69,8 @@ jobs:
 
       - name: Attach to release
         if: startsWith( github.ref, 'refs/tags/' )
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           cp block-context.zip "block-context.${{ github.ref_name }}.zip"
           gh release upload ${{ github.ref_name }} "block-context.${{ github.ref_name }}.zip" --clobber
