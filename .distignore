@@ -6,6 +6,7 @@
 /tests/
 /wordpress/
 /wp-content/
+/vendor/bin/
 /.cache/
 composer.json
 composer.lock
