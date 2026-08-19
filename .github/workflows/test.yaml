@@ -23,8 +23,36 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Setup toolchain
-        uses: ./.github/actions/setup-toolchain
+      - name: Setup NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v2
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup cache for dependencies
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ steps.composer-cache.outputs.dir }}
+            .cache
+          key: ${{ runner.os }}-cache-${{ hashFiles( 'composer.lock', 'package-lock.json', '.wp-env.json' ) }}
+          restore-keys: ${{ runner.os }}-cache-
+
+      - name: Install tooling
+        run: npm install
+
+      - name: Install PHP dependencies
+        run: composer install
 
       - name: Start the environment
         run: npm run start
