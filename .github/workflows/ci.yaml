@@ -97,10 +97,10 @@ jobs:
 
       - name: Add to trunk and tag
         working-directory: svn
+        if: startsWith( github.ref, 'refs/tags/' )
         run: |
           rsync --archive --delete ../block-context/ trunk/
           svn add trunk --force
-          mkdir -p "tags/${{ github.ref_name }}"
           svn cp trunk "tags/${{ github.ref_name }}"
           svn status
 
