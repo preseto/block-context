@@ -150,7 +150,7 @@ mkdir( $dist_dir, 0777, true );
 $zip = new ZipArchive();
 
 if ( true !== $zip->open( $target, ZipArchive::CREATE | ZipArchive::OVERWRITE ) ) {
-	trigger_error( sprintf( 'Failed to create %s', $target ), E_USER_ERROR );
+	throw new RuntimeException( sprintf( 'Failed to create %s', $target ) );
 }
 
 $iterator = new RecursiveIteratorIterator(
@@ -172,7 +172,7 @@ foreach ( $iterator as $path ) {
 		copy( $path, $dist_filename );
 		$zip->addFile( $path, $plugin_slug . '/' . $relative );
 
-		$count++;
+		++$count;
 	}
 }
 
@@ -184,7 +184,7 @@ if ( is_readable( $readme_template ) ) {
 	file_put_contents( $dist_dir . '/readme.txt', $readme_txt );
 	$zip->addFromString( $plugin_slug . '/readme.txt', $readme_txt );
 
-	$count++;
+	++$count;
 }
 
 $zip->close();
