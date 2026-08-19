@@ -1,4 +1,4 @@
-name: Test
+name: Test and Release
 
 on:
   push:
@@ -50,9 +50,6 @@ jobs:
       - name: Start the environment
         run: npm run start
 
-      - name: Install PHP dependencies
-        run: npm run cli -- composer install
-
       - name: Lint
         run: npm run lint
 
@@ -64,3 +61,45 @@ jobs:
 
       - name: Release
         run: npm run release
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          path: block-context.zip
+
+  release:
+    name: Release to WordPress.org
+    runs-on: ubuntu-24.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: block-context.zip
+
+      - name: Unzip release
+        run: |
+          unzip block-context.zip
+          ls -lah
+
+      - name: SVN clone
+        run: svn checkout https://plugins.svn.wordpress.org/block-context/ svn
+
+      - name: Sync to trunk
+        #if: startsWith( github.ref, 'refs/tags/' )
+        working-directory: svn
+        run: |
+          rm -rf trunk/
+          cp -r ../block-context trunk
+          svn add trunk
+          svn commit --dry-run -m "Sync to trunk"
+
+      - name: Tag a release
+        #if: startsWith( github.ref, 'refs/tags/' )
+        working-directory: svn
+        run: |
+          svn cp trunk tags/2.0
+          svn add tags/2.0
+          svn commit --dry-run -m "Tag release"
+
