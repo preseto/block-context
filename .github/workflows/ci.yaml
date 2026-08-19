@@ -88,9 +88,7 @@ jobs:
           sudo apt install --yes subversion
 
       - name: Unzip release
-        run: |
-          unzip block-context.zip
-          ls -lah
+        run: unzip block-context.zip
 
       - name: SVN clone
         run: svn checkout https://plugins.svn.wordpress.org/block-context/ svn
