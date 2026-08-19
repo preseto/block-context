@@ -38,11 +38,11 @@ jobs:
       - name: Install tooling
         run: npm install
 
-      - name: Install PHP dependencies
-        run: npm run cli -- composer install
-
       - name: Start the environment
         run: npm run start
+
+      - name: Install PHP dependencies
+        run: npm run cli -- composer install
 
       - name: Lint
         run: npm run lint
