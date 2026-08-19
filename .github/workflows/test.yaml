@@ -35,6 +35,12 @@ jobs:
           key: ${{ runner.os }}-cache-${{ hashFiles( 'composer.lock', 'package-lock.json', '.wp-env.json' ) }}
           restore-keys: ${{ runner.os }}-cache-
 
+      - name: Setup PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+
       - name: Install tooling
         run: npm install
 
