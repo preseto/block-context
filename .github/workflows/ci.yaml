@@ -76,6 +76,11 @@ jobs:
 
       - uses: actions/download-artifact@v8
 
+      - name: Setup SVN
+        run: |
+          sudo apt update
+          sudo apt install --yes subversion
+
       - name: Unzip release
         run: |
           unzip block-context.zip
