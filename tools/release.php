@@ -82,7 +82,7 @@ function is_ignored( string $path, array $patterns ): bool {
  * Get the plugin version from the main plugin file header.
  */
 function get_plugin_version( string $plugin_file ): string {
-	$source = file_get_contents( $plugin_file );
+	$source = file_get_contents( $plugin_file, false, null, 0, 8192 );
 
 	if ( preg_match( '/Version:\s*(.+)$/mi', $source, $match ) ) {
 		return trim( $match[1] );
