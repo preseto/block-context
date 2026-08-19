@@ -1,9 +1,10 @@
-/node_modules
-/vendor
-/build
-/dist
-/.cache
-/tests/coverage
+/node_modules/
+/vendor/
+/build/
+/dist/
+/tests/coverage/
+/svn/
+/.cache/
 
 *.log
 *.zip
