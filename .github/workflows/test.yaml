@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WP_ENV_HOME: .cache/wp-env
+
+jobs:
+
+  test:
+    name: Lint and Test
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup toolchain
+        uses: ./.github/actions/setup-toolchain
+
+      - name: Start the environment
+        run: npm run start
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Report code coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: tests/coverage/phpunit-cobertura.xml
+          disable_telem: true
