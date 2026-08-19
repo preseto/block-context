@@ -5,6 +5,10 @@
 /.cache
 /tests/coverage
 
+*.log
+*.zip
+*.sql
+
 .phpunit.result.cache
 phpcs.xml
 phpunit.xml
