@@ -100,6 +100,7 @@ jobs:
         run: |
           rsync --archive --delete ../block-context/ trunk/
           svn add trunk --force
+          mkdir -p "tags/${{ github.ref_name }}"
           svn cp trunk "tags/${{ github.ref_name }}"
           svn status
 
