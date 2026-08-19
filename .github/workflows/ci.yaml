@@ -93,7 +93,7 @@ jobs:
       - name: SVN clone
         run: svn checkout https://plugins.svn.wordpress.org/block-context/ svn
 
-      - name: Sync trunk and tag release
+      - name: Add to trunk and tag
         working-directory: svn
         run: |
           rsync --archive --delete ../block-context/ trunk/
