@@ -32,6 +32,6 @@
 	<exclude-pattern>/node_modules/</exclude-pattern>
 	<exclude-pattern>/tests/coverage/</exclude-pattern>
 	<exclude-pattern>/vendor/</exclude-pattern>
-	<exclude-pattern>/wordpress/</exclude-pattern>
-	<exclude-pattern>/wp-content/</exclude-pattern>
+	<exclude-pattern>/tools/wordpress/</exclude-pattern>
+	<exclude-pattern>/tools/wp-content/</exclude-pattern>
 </ruleset>
