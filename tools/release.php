@@ -124,6 +124,29 @@ if ( ! is_dir( dirname( $target ) ) ) {
 	mkdir( dirname( $target ), 0777, true );
 }
 
+$dist_dir = $root_dir . '/dist';
+
+function rm_dir( string $dir ): bool {
+	if ( ! is_dir( $dir ) ) {
+		return false;
+	}
+
+	foreach ( scandir( $dir ) as $file ) {
+		if ( '.' !== $file && '..' !== $file ) {
+			if ( is_dir( "$dir/$file" ) ) {
+				rm_dir( "$dir/$file" );
+			} else {
+				unlink( "$dir/$file" );
+			}
+		}
+	}
+
+	return rmdir( $dir );
+}
+
+rm_dir( $dist_dir );
+mkdir( $dist_dir, 0777, true );
+
 $zip = new ZipArchive();
 
 if ( true !== $zip->open( $target, ZipArchive::CREATE | ZipArchive::OVERWRITE ) ) {
@@ -140,7 +163,15 @@ foreach ( $iterator as $path ) {
 	$relative = substr( $path, strlen( $root_dir ) + 1 );
 
 	if ( ! is_ignored( $relative, $patterns ) ) {
+		$dist_filename = $dist_dir . '/' . $relative;
+
+		if ( ! is_dir( dirname( $dist_filename ) ) ) {
+			mkdir( dirname( $dist_filename ), 0777, true );
+		}
+
+		copy( $path, $dist_filename );
 		$zip->addFile( $path, $plugin_slug . '/' . $relative );
+
 		$count++;
 	}
 }
@@ -148,7 +179,11 @@ foreach ( $iterator as $path ) {
 $readme_template = $root_dir . '/readme.txt.md';
 
 if ( is_readable( $readme_template ) ) {
-	$zip->addFromString( $plugin_slug . '/readme.txt', render_readme( $readme_template, $version ) );
+	$readme_txt = render_readme( $readme_template, $version );
+
+	file_put_contents( $dist_dir . '/readme.txt', $readme_txt );
+	$zip->addFromString( $plugin_slug . '/readme.txt', $readme_txt );
+
 	$count++;
 }
 
