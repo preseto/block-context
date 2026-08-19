@@ -1,0 +1,112 @@
+name: Test and Release
+
+on:
+  push:
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WP_ENV_HOME: .cache/wp-env
+  COMPOSER_CACHE_DIR: .cache/composer
+
+jobs:
+
+  test:
+    name: Lint and Test
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - uses: actions/cache@v6
+        with:
+          path: .cache
+          key: ${{ runner.os }}-cache-${{ hashFiles( 'composer.lock', 'package-lock.json', '.wp-env.json' ) }}
+          restore-keys: ${{ runner.os }}-cache-
+
+      - name: Setup PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+
+      - name: Install tooling
+        run: npm install
+
+      - name: Install PHP tooling
+        run: composer install
+
+      - name: Start the environment
+        run: npm run start
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Release
+        run: npm run release
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          path: block-context.zip
+
+      - name: Attach to release
+        if: startsWith( github.ref, 'refs/tags/' )
+        run: |
+          cp block-context.zip "block-context.${{ github.ref_name }}.zip"
+          gh release upload ${{ github.ref_name }} "block-context.${{ github.ref_name }}.zip" --clobber
+
+  release:
+    name: Release to WordPress.org
+    runs-on: ubuntu-24.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+
+      - name: Setup SVN
+        run: |
+          sudo apt update
+          sudo apt install --yes subversion
+
+      - name: Unzip release
+        run: unzip block-context.zip
+
+      - name: SVN clone
+        run: svn checkout https://plugins.svn.wordpress.org/block-context/ svn
+
+      - name: Add to trunk and tag
+        working-directory: svn
+        run: |
+          rsync --archive --delete ../block-context/ trunk/
+          svn add trunk --force
+          svn cp trunk "tags/${{ github.ref_name }}"
+          svn status
+
+      - name: Commit Tag
+        if: startsWith( github.ref, 'refs/tags/' )
+        working-directory: svn
+        run: svn commit "tags/${{ github.ref_name }}" --dry-run -m "Release ${{ github.ref_name }}" --username "${{ secrets.WPORG_USERNAME }}" --password "${{ secrets.WPORG_PASSWORD }}" --non-interactive --no-auth-cache
+
+      - name: Commit Stable Trunk
+        if: startsWith( github.ref, 'refs/tags/' ) && ! contains( github.ref_name, '-' )
+        working-directory: svn
+        run: svn commit trunk -m "Release ${{ github.ref_name }}" --username "${{ secrets.WPORG_USERNAME }}" --password "${{ secrets.WPORG_PASSWORD }}" --non-interactive --no-auth-cache

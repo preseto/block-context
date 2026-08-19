@@ -1,7 +1,7 @@
+import { addFilter } from '@wordpress/hooks';
+
 import BlockContextControls from './components/block-context-controls';
 import blockContextAttributes from './block-context-attributes';
-
-const { addFilter } = wp.hooks;
 
 // Add context attributes to all blocks.
 addFilter(

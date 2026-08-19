@@ -12,7 +12,7 @@ class UserLoggedIn extends Context {
 	 *
 	 * @return string
 	 */
-	public function id() {
+	public function id(): string {
 		return 'UserLoginState';
 	}
 
@@ -23,7 +23,7 @@ class UserLoggedIn extends Context {
 	 *
 	 * @return boolean
 	 */
-	public function match( $state ) {
+	public function match( string $state ): bool {
 		$is_logged_in = (bool) is_user_logged_in();
 
 		$rules = [
@@ -33,5 +33,4 @@ class UserLoggedIn extends Context {
 
 		return ( isset( $rules[ $state ] ) && true === $rules[ $state ] );
 	}
-
 }

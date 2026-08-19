@@ -12,7 +12,7 @@ class ContextRule extends Context {
 	 *
 	 * @return string
 	 */
-	public function id() {
+	public function id(): string {
 		return 'ContextRule';
 	}
 
@@ -23,8 +23,7 @@ class ContextRule extends Context {
 	 *
 	 * @return null
 	 */
-	public function match( $state ) {
+	public function match( string $state ): ?bool {
 		return null;
 	}
-
 }

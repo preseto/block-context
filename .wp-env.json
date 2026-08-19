@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"testsEnvironment": false,
+	"phpVersion": "7.4",
+	"core": "./tools/wordpress",
+	"mappings": {
+		"wp-content": "./tools/wp-content",
+		"wp-content/plugins/block-context": "."
+	},
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": true,
+		"WP_DEBUG_DISPLAY": true,
+		"SCRIPT_DEBUG": true
+	}
+}

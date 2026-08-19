@@ -15,12 +15,26 @@ class BlockContext {
 	const CONTEXT_ID_PREFIX = 'blockContext';
 
 	/**
+	 * Block instance.
+	 *
+	 * @var \Preseto\BlockContext\Block
+	 */
+	protected Block $block;
+
+	/**
+	 * Context rule instance.
+	 *
+	 * @var \Preseto\BlockContext\Contexts\Context
+	 */
+	protected Contexts\Context $context;
+
+	/**
 	 * Setup a block in context.
 	 *
-	 * @param Preseto\BlockContext\Block        $block   Block.
-	 * @param Preseto\BlockContext\BlockContext $context Context rule.
+	 * @param \Preseto\BlockContext\Block            $block   Block.
+	 * @param \Preseto\BlockContext\Contexts\Context $context Context rule.
 	 */
-	public function __construct( $block, $context ) {
+	public function __construct( Block $block, Contexts\Context $context ) {
 		$this->block = $block;
 		$this->context = $context;
 	}
@@ -30,7 +44,7 @@ class BlockContext {
 	 *
 	 * @return boolean
 	 */
-	public function matches() {
+	public function matches(): bool {
 		$value = $this->value();
 
 		return ( null !== $value && $this->context->match( $value ) );
@@ -50,7 +64,7 @@ class BlockContext {
 	 *
 	 * @return string
 	 */
-	public function attribute_key() {
+	public function attribute_key(): string {
 		$id = str_replace( [ '-', '_' ], '', $this->context->id() );
 
 		return sprintf(
@@ -59,5 +73,4 @@ class BlockContext {
 			ucwords( $id )
 		);
 	}
-
 }
