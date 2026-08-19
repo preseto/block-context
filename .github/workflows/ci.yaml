@@ -98,10 +98,15 @@ jobs:
         run: |
           rsync --archive --delete ../block-context/ trunk/
           svn add trunk --force
-          svn cp trunk tags/${{ github.ref_name }}
+          svn cp trunk "tags/${{ github.ref_name }}"
           svn status
 
-      - name: Commit release
+      - name: Commit Tag
         if: startsWith( github.ref, 'refs/tags/' )
         working-directory: svn
-        run: svn commit --dry-run -m "Release ${{ github.ref_name }}" --username "${{ secrets.WPORG_USERNAME }}" --password "${{ secrets.WPORG_PASSWORD }}" --non-interactive --no-auth-cache
+        run: svn commit "tags/${{ github.ref_name }}" --dry-run -m "Release ${{ github.ref_name }}" --username "${{ secrets.WPORG_USERNAME }}" --password "${{ secrets.WPORG_PASSWORD }}" --non-interactive --no-auth-cache
+
+      - name: Commit Stable Trunk
+        if: ${{ startsWith( github.ref, 'refs/tags/' ) && ! contains( github.ref_name, '-' ) }}
+        working-directory: svn
+        run: svn commit trunk --dry-run -m "Release ${{ github.ref_name }}" --username "${{ secrets.WPORG_USERNAME }}" --password "${{ secrets.WPORG_PASSWORD }}" --non-interactive --no-auth-cache
