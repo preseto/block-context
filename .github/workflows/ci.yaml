@@ -79,6 +79,7 @@ jobs:
     name: Release to WordPress.org
     runs-on: ubuntu-24.04
     needs: test
+    if: startsWith( github.ref, 'refs/tags/' )
     steps:
       - uses: actions/checkout@v7
 
@@ -97,7 +98,6 @@ jobs:
 
       - name: Add to trunk and tag
         working-directory: svn
-        if: startsWith( github.ref, 'refs/tags/' )
         run: |
           rsync --archive --delete ../block-context/ trunk/
           svn add trunk --force
