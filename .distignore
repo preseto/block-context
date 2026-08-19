@@ -20,4 +20,6 @@ phpunit.xml.dist
 readme.md
 readme.txt.md
 *.log
+*.zip
+*.sql
 .*
