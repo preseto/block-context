@@ -10,6 +10,7 @@ concurrency:
 
 env:
   WP_ENV_HOME: .cache/wp-env
+  COMPOSER_CACHE_DIR: .cache/composer
 
 jobs:
 
@@ -21,30 +22,16 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/cache@v6
         with:
-          php-version: '7.4'
-          tools: composer:v2
-
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
-
-      - name: Setup cache for dependencies
-        uses: actions/cache@v5
-        with:
-          path: |
-            ${{ steps.composer-cache.outputs.dir }}
-            .cache
+          path: .cache
           key: ${{ runner.os }}-cache-${{ hashFiles( 'composer.lock', 'package-lock.json', '.wp-env.json' ) }}
           restore-keys: ${{ runner.os }}-cache-
 
@@ -52,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Install PHP dependencies
-        run: composer install
+        run: npm run cli -- composer install
 
       - name: Start the environment
         run: npm run start
@@ -65,10 +52,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Report code coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: tests/coverage/phpunit-cobertura.xml
-          disable_telem: true
