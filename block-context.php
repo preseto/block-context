@@ -3,7 +3,7 @@
  * Plugin Name: Block Context
  * Plugin URI: https://blockcontext.com
  * Description: Hide Gutenberg editor blocks in context.
- * Version: 0.2.0
+ * Version: 0.2.0-beta
  * Author: Kaspars Dambis
  * Author URI: https://kaspars.net
  * Requires PHP: 7.4
