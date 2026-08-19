@@ -44,6 +44,9 @@ jobs:
       - name: Install tooling
         run: npm install
 
+      - name: Install PHP tooling
+        run: composer install
+
       - name: Start the environment
         run: npm run start
 
